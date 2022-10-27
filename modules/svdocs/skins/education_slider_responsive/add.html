@@ -1,0 +1,76 @@
+<include target="_add_pc.html" cond="!Mobile::isMobileCheckByAgent()"/>
+<include target="_add_mob.html" cond="Mobile::isMobileCheckByAgent()"/>
+
+<script>
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        async: true
+    });
+}
+
+// regarding no layout case
+if(typeof _g_sGaectkVersion == 'undefined') 
+	jQuery.loadScript('https://svapi.co.kr:5018/gaectk.js', function(){
+    //Stuff to do after someScript has loaded
+	//console.log(_g_sGaectkVersion);
+});
+
+if(typeof wcs == 'undefined') 
+	jQuery.loadScript('//wcs.naver.net/wcslog.js', function(){
+    //Stuff to do after someScript has loaded
+	//console.log(wcs);
+});
+
+if(typeof fbq == 'undefined') 
+{
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js');
+	//console.log(fbq);
+}
+
+<block cond="$teaser_open=='Y'">
+initializeClock('clockdiv', '{$module_info->open_datetime}', {$remaining_applicants});
+</block>
+<block cond="$teaser_open!='Y'">
+initializeClock('clockdiv', '{$module_info->due_datetime}', {$remaining_applicants});
+</block>
+<block cond="!Mobile::isMobileCheckByAgent()">
+var _g_sVirtualConversionPrefix = 'thankyou_{$module_info->module_srl}_pc';
+</block>
+<block cond="Mobile::isMobileCheckByAgent()">
+var _g_sVirtualConversionPrefix = 'thankyou_{$module_info->module_srl}_mob';
+</block>
+
+function _doPreRegistration()
+{
+<block cond="$config->nvad_conv_id">
+	var _nasa={};
+	_nasa["cnv"] = wcs.cnv("4","500"); // 전환유형, 전환가치 설정해야함. 설치매뉴얼 참고
+</block>
+<block cond="$config->facebook_pixel_id">
+	fbq('track', 'CompleteRegistration');
+</block>
+	//var aUri = getUrlVars();
+	//if(aUri['test'] == 'a' )
+	//	jQuery('input[id="page_type"]').val('disinfection');
+	doRegistration( _g_sVirtualConversionPrefix );
+}
+
+function _doPreCertified()
+{
+<block cond="$config->nvad_conv_id">
+	var _nasa={};
+	_nasa["cnv"] = wcs.cnv("4","500"); // 전환유형, 전환가치 설정해야함. 설치매뉴얼 참고
+</block>
+<block cond="$config->facebook_pixel_id">
+	fbq('track', 'CompleteRegistration');
+</block>
+	doCertified( _g_sVirtualConversionPrefix );
+}
+</script>
