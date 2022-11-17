@@ -1,0 +1,109 @@
+{@
+$aPreMomNo = Array('05'=>'138', '06'=>'139', '07'=>'140', '08'=>'141', '09'=>'142', '10'=>'143', '11'=>'144', '12'=>'145');
+$aPostMomNo = Array('05'=>'16', '06'=>'17', '07'=>'18', '08'=>'19', '09'=>'20', '10'=>'21', '11'=>'22', '12'=>'23');
+$sMonth = date("m", time());
+$sYearMonth = date("Y년 m월 ", time());
+}
+
+<link href="/modules/svdocs/skins/ange_mombox/css/samplepack.css" rel="stylesheet">
+
+<div class="container">
+	<div class="sub-wrapper">
+		<!-- 서브 lnb -->
+		<nav class="nav-lnb">
+			<h2 class="nav-title">앙쥬맘박스</h2>
+			<ul id="lnb-list">
+				<li class="active"><a href='#'>앙쥬맘박스 신청하기</a></li>
+				<li class=""><a href='#'>앙쥬맘박스 후기</a></li>
+			</ul>
+		</nav>
+		<!-- Content Start -->
+		<div class="sub-content">
+			<article class="samplepack-wrap">
+<!--@if($module_info->default_style=='before')-->
+	<include target="_before_old.html" cond="$mode!='slide'"/>
+	<include target="_before_slide.html" cond="$mode=='slide'"/>
+<!--@elseif($module_info->default_style=='after')-->
+	<include target="_after.html" />
+<!--@end-->
+			</article>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="../../tpl/skin.js/countdown_timer.js"></script>
+<script>
+initializeClock('clockdiv', '{$module_info->due_datetime}', {$remaining_applicants});
+
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        async: true
+    });
+}
+
+// regarding no layout case
+if(typeof _g_sGaectkVersion == 'undefined') 
+	jQuery.loadScript('https://svapi.co.kr:5018/gaectk.js', function(){
+    //Stuff to do after someScript has loaded
+	//console.log(_g_sGaectkVersion);
+});
+
+if(typeof wcs == 'undefined') 
+	jQuery.loadScript('//wcs.naver.net/wcslog.js', function(){
+    //Stuff to do after someScript has loaded
+	//console.log(wcs);
+});
+
+if(typeof fbq == 'undefined') 
+{
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js');
+	//console.log(fbq);
+}
+
+<block cond="$teaser_open=='Y'">
+initializeClock('clockdiv', '{$module_info->open_datetime}', {$remaining_applicants});
+</block>
+<block cond="$teaser_open!='Y'">
+initializeClock('clockdiv', '{$module_info->due_datetime}', {$remaining_applicants});
+</block>
+<block cond="!Mobile::isMobileCheckByAgent()">
+var _g_sVirtualConversionPrefix = 'thankyou_{$module_info->module_srl}_pc';
+</block>
+<block cond="Mobile::isMobileCheckByAgent()">
+var _g_sVirtualConversionPrefix = 'thankyou_{$module_info->module_srl}_mob';
+</block>
+
+function _doPreRegistration()
+{
+<block cond="$config->nvad_conv_id">
+	var _nasa={};
+	_nasa["cnv"] = wcs.cnv("4","500"); // 전환유형, 전환가치 설정해야함. 설치매뉴얼 참고
+</block>
+<block cond="$config->facebook_pixel_id">
+	fbq('track', 'CompleteRegistration');
+</block>
+	//var aUri = getUrlVars();
+	//if(aUri['test'] == 'a' )
+	//	jQuery('input[id="page_type"]').val('disinfection');
+	doRegistration( _g_sVirtualConversionPrefix );
+}
+
+function _doPreCertified()
+{
+<block cond="$config->nvad_conv_id">
+	var _nasa={};
+	_nasa["cnv"] = wcs.cnv("4","500"); // 전환유형, 전환가치 설정해야함. 설치매뉴얼 참고
+</block>
+<block cond="$config->facebook_pixel_id">
+	fbq('track', 'CompleteRegistration');
+</block>
+	doCertified( _g_sVirtualConversionPrefix );
+}
+</script>
