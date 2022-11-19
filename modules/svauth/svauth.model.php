@@ -194,8 +194,10 @@ class svauthModel extends svauth
 						$options = array($options);
 					$options_count = count($options);
 					$thumbnail_exist = false;
+
 					for($j=0; $j < $options_count; $j++)
 					{
+						$buff .= sprintf('$plugin_info->extra_var->%s->options["%s"] = new stdClass();', $var->attrs->name, $options[$j]->attrs->value);
 						$thumbnail = $options[$j]->attrs->src;
 						if($thumbnail)
 						{

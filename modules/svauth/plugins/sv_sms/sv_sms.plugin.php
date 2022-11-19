@@ -245,8 +245,13 @@ class sv_sms extends SvauthPlugin
 		else
 			$args->content = $keystr;
 		$args->country = $country_code;
-		$oTxtmsgController = &getController('textmessage');
-		$output = $oTxtmsgController->sendMessage($args);
+		
+		$aSmsModule = ["textmessage", "infodata_sms"];
+		if(!in_array($oPluginInfo->sms_module, $aSmsModule))
+			return new BaseObject(-1, 'invalid sms module');
+
+		$oSmsController = &getController($oPluginInfo->sms_module);
+		$output = $oSmsController->sendMessage($args);
 		if(!$output->toBool()) 
 		{
 			if($output->get('error_code'))
@@ -352,14 +357,16 @@ class sv_sms extends SvauthPlugin
  */
 	private function _recordDeniedApproach($nRequestModuleSrl, $sPhonenum, $sErrCode, $sPassedOption='N')
 	{
-		$args->country_code = 82;
-		$args->module_srl = $nRequestModuleSrl;
-		$args->clue = $sPhonenum;
-		$args->authcode = $sErrCode;
-		$args->passed = $sPassedOption; //'Y';
-		$args->is_valid = 'N';
-		$args->ipaddress = $_SERVER['REMOTE_ADDR'];
-		$output = executeQuery('svauth.insertSmsAuth', $args);
+		$oArgs = new stdClass();
+		$oArgs->country_code = 82;
+		$oArgs->module_srl = $nRequestModuleSrl;
+		$oArgs->clue = $sPhonenum;
+		$oArgs->authcode = $sErrCode;
+		$oArgs->passed = $sPassedOption; //'Y';
+		$oArgs->is_valid = 'N';
+		$oArgs->ipaddress = $_SERVER['REMOTE_ADDR'];
+		executeQuery('svauth.insertSmsAuth', $oArgs);
+		unset($oArgs);
 	}
 }
 /* End of file sv_sms.plugin.php */

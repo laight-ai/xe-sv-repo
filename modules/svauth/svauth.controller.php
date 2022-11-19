@@ -75,7 +75,8 @@ class svauthController extends svauth
             Context::set('plugin_srl', $nPluginSrl);
             Context::set('phone_number', $obj->mobile);
             $oRst = $this->procSvauthValidateAuthCode();
-            if(!$oRst->toBool()) 
+debugPrint($oRst );
+			if(!$oRst->toBool()) 
                 return new BaseObject(-1, $oRst->message);
         }
         unset($oConfig);

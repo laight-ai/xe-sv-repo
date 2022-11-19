@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 	<title xml:lang="ko">싱글뷰 SMS 플러그인</title>
-	<description xml:lang="ko">싱글뷰 SMS 플러그인 textmessage 모듈 필수</description>
+	<description xml:lang="ko">싱글뷰 SMS 플러그인</description>
 	<version>0.1</version>
 	<date>2017-08-05</date>
 	<author email_address="root@singleview.co.kr" link="http://singleview.co.kr">
@@ -12,6 +12,19 @@
 	<extra_vars>
 		<group>
 			<title xml:lang="ko">기본설정</title>
+			<var name="sms_module" type="select">
+				<title xml:lang="ko">SMS 모듈</title>
+				<description xml:lang="ko">SMS 발송 대행사 모듈을 선택하세요.</description>
+				<options value="">
+					<title xml:lang="ko">선택하세요</title>
+				</options>
+				<options value="textmessage">
+					<title xml:lang="ko">coolsms.co.kr</title>
+				</options>
+				<options value="infodata_sms">
+					<title xml:lang="ko">www.ibizplus.co.kr</title>
+				</options>
+			</var>
 			<var name="sender_no" type="text">
 				<title xml:lang="ko">SMS 발신번호</title>
 				<description xml:lang="ko">SMS에 표시되는 발신번호를 입력합니다.</description>
