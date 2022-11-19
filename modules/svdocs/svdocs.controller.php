@@ -192,19 +192,19 @@ class svdocsController extends svdocs
 
 		// 회원 번호 중복 방지 검사
 		$logged_info = Context::get('logged_info');
-		if( $oDocInfo->svdocs_unique_field[member_srl] == 'on' && $logged_info->member_srl )
+		if($oDocInfo->svdocs_unique_field['member_srl'] == 'on' && $logged_info->member_srl)
 		{
-			$args->member_srl = $logged_info->member_srl;
-			$args->module_srl = $nModuleSrl;
-			$output = executeQueryArray('svdocs.getDocByMemberSrl', $args);
+			$oArgs = new stdClass();
+			$oArgs->member_srl = $logged_info->member_srl;
+			$oArgs->module_srl = $nModuleSrl;
+			$output = executeQueryArray('svdocs.getDocByMemberSrl', $oArgs);
+			unset($oArgs);
 			if(!$output->toBool() )
 				return $output;
 			
 			if( count($output->data) > 0 )
 				return new BaseObject( -1, 'msg_already_registered');
 		}
-
-		unset($args); 
 
 		if( $oDocInfo->nRemainingApplicants == 0 )
 			return new BaseObject( -1, 'msg_application_closed');
@@ -221,6 +221,7 @@ class svdocsController extends svdocs
 				return new BaseObject(-1, 'msg_already_registered');
 			}
 		}*/
+		$args = new stdClass();
 		$args->module_srl = Context::get('module_srl');
 		
 		// valudate mandatory extra vars  -> procSvdocsUpdate 공통 영역 시작

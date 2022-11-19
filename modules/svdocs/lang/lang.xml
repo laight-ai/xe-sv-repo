@@ -3,139 +3,36 @@
 	<item name="sv_column_type_list" type="array">
 		<item name="text">
 			<value xml:lang="ko"><![CDATA[한줄 입력칸(text)]]></value>
-			<value xml:lang="en"><![CDATA[one-line text]]></value>
-			<value xml:lang="jp"><![CDATA[入力フィールド(text)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[单行文本输入区(text)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[單行文字]]></value>
-			<value xml:lang="fr"><![CDATA[Texte en une seul ligne]]></value>
-			<value xml:lang="de"><![CDATA[eine Zeile Text]]></value>
-			<value xml:lang="ru"><![CDATA[Однострочное окно ввода]]></value>
-			<value xml:lang="es"><![CDATA[Texto sin cambio de línea]]></value>
-			<value xml:lang="tr"><![CDATA[tek satırlık metin]]></value>
-			<value xml:lang="vi"><![CDATA[Ô nhập liệu]]></value>
-			<value xml:lang="mn"><![CDATA[Нэг мөрөөр оруулах(text)]]></value>
 		</item>
 		<item name="hidden">
 			<value xml:lang="ko"><![CDATA[숨김값(hidden)]]></value>
 		</item>
 		<item name="homepage">
 			<value xml:lang="ko"><![CDATA[URL 형식]]></value>
-			<value xml:lang="en"><![CDATA[URL]]></value>
-			<value xml:lang="jp"><![CDATA[URLタイプ(url)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[网址格式(url)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[網址格式]]></value>
-			<value xml:lang="fr"><![CDATA[URL]]></value>
-			<value xml:lang="de"><![CDATA[Url-Adresse]]></value>
-			<value xml:lang="es"><![CDATA[URL de la página web]]></value>
-			<value xml:lang="vi"><![CDATA[URL]]></value>
-			<value xml:lang="mn"><![CDATA[Веб хуудас хэлбэр(url)]]></value>
 		</item>
 		<item name="email_address">
 			<value xml:lang="ko"><![CDATA[이메일 형식(email)]]></value>
-			<value xml:lang="en"><![CDATA[Email]]></value>
-			<value xml:lang="jp"><![CDATA[メールアドレスタイプ(email)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[邮件格式(email)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[電子郵件]]></value>
-			<value xml:lang="fr"><![CDATA[Mél]]></value>
-			<value xml:lang="de"><![CDATA[E-Mail]]></value>
-			<value xml:lang="es"><![CDATA[Correo Electrónico]]></value>
-			<value xml:lang="tr"><![CDATA[e-posta]]></value>
-			<value xml:lang="vi"><![CDATA[Email]]></value>
-			<value xml:lang="mn"><![CDATA[Мэйл хэлбэр(email)]]></value>
 		</item>
 		<item name="tel">
 			<value xml:lang="ko"><![CDATA[전화번호 형식(phone)]]></value>
-			<value xml:lang="en"><![CDATA[Phone number]]></value>
-			<value xml:lang="jp"><![CDATA[電話番号タイプ(phone)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[电话号码格式(phone)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[電話號碼格式(phone)]]></value>
-			<value xml:lang="fr"><![CDATA[Numéro de Telephone]]></value>
-			<value xml:lang="de"><![CDATA[Telefonnummer]]></value>
-			<value xml:lang="ru"><![CDATA[номер телефона]]></value>
-			<value xml:lang="es"><![CDATA[Número de teléfono]]></value>
-			<value xml:lang="tr"><![CDATA[telefon numarası]]></value>
-			<value xml:lang="vi"><![CDATA[Số điện thoại]]></value>
-			<value xml:lang="mn"><![CDATA[Утасны дугаар хэлбэр(phone)]]></value>
 		</item>
 		<item name="textarea">
 			<value xml:lang="ko"><![CDATA[여러 줄 입력칸(textarea)]]></value>
-			<value xml:lang="en"><![CDATA[multi-line textarea]]></value>
-			<value xml:lang="jp"><![CDATA[テキストエリア(textarea)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[多行文本框(textarea)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[文字區域(textarea)]]></value>
-			<value xml:lang="fr"><![CDATA[Texte en plusieurs lignes]]></value>
-			<value xml:lang="de"><![CDATA[Mehrere Zeilen Text]]></value>
-			<value xml:lang="ru"><![CDATA[Многострочное окно ввода]]></value>
-			<value xml:lang="es"><![CDATA[Texto multi-linea]]></value>
-			<value xml:lang="tr"><![CDATA[cok satırlı metin alanı]]></value>
-			<value xml:lang="vi"><![CDATA[Khu vực nội dung]]></value>
-			<value xml:lang="mn"><![CDATA[Олон мөрөөр оруулах(textarea)]]></value>
 		</item>
 		<item name="radio">
 			<value xml:lang="ko"><![CDATA[단일 선택(radio)]]></value>
-			<value xml:lang="en"><![CDATA[radio button(radio)]]></value>
-			<value xml:lang="jp"><![CDATA[ラジオボタン(radio)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[单选框(radio)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[選項按紐(radio)]]></value>
-			<value xml:lang="de"><![CDATA[Radiobutton]]></value>
-			<value xml:lang="ru"><![CDATA[Кнопка радио(радио)]]></value>
-			<value xml:lang="tr"><![CDATA[radyo tuşu(radyo)]]></value>
-			<value xml:lang="mn"><![CDATA[Нэг eдeр сонгох(radio)]]></value>
 		</item>
 		<item name="select">
 			<value xml:lang="ko"><![CDATA[단일 선택(single select)]]></value>
-			<value xml:lang="en"><![CDATA[single select box]]></value>
-			<value xml:lang="jp"><![CDATA[ひとつ選択(select)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[下拉列表框(select)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[下拉式選單(select)]]></value>
-			<value xml:lang="fr"><![CDATA[Case d'option(seul choix)]]></value>
-			<value xml:lang="de"><![CDATA[Nur eine Auswahl]]></value>
-			<value xml:lang="ru"><![CDATA[Выбор(один вариант)]]></value>
-			<value xml:lang="es"><![CDATA[Selección(selección individual)]]></value>
-			<value xml:lang="tr"><![CDATA[kutuyu seç(tekli seçim)]]></value>
-			<value xml:lang="vi"><![CDATA[Ô chọn(Một lựa chọn)]]></value>
-			<value xml:lang="mn"><![CDATA[Ганц сонголт хийх(select)]]></value>
 		</item>
 		<item name="checkbox">
 			<value xml:lang="ko"><![CDATA[다중 선택(checkbox)]]></value>
-			<value xml:lang="en"><![CDATA[checkbox(multiple selection)]]></value>
-			<value xml:lang="jp"><![CDATA[チェックボックス(checkbox)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[复选框(checkbox)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[核取方塊(checkbox)]]></value>
-			<value xml:lang="fr"><![CDATA[Case à cocher(multichoix)]]></value>
-			<value xml:lang="de"><![CDATA[Multiple Auswahl]]></value>
-			<value xml:lang="ru"><![CDATA[Чекбокс(мульти вариант)]]></value>
-			<value xml:lang="es"><![CDATA[Caja de chequeo(selección múltiple)]]></value>
-			<value xml:lang="tr"><![CDATA[onay kutusu(çoklu seçim)]]></value>
-			<value xml:lang="vi"><![CDATA[Ô chọn(Nhiều lựa chọn)]]></value>
-			<value xml:lang="mn"><![CDATA[Олон сонголт хийх(checkbox)]]></value>
 		</item>
 		<item name="kr_zip">
 			<value xml:lang="ko"><![CDATA[한국주소(zip)]]></value>
-			<value xml:lang="en"><![CDATA[zip code(Korean)]]></value>
-			<value xml:lang="jp"><![CDATA[韓国住所(zip)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[韩国邮编(zip)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[韓國郵編(zip)]]></value>
-			<value xml:lang="fr"><![CDATA[Code postal(coréen)]]></value>
-			<value xml:lang="de"><![CDATA[Postleitzahl(aber nur in Korean)]]></value>
-			<value xml:lang="ru"><![CDATA[Почтовый индекс(Корейский)]]></value>
-			<value xml:lang="tr"><![CDATA[zip kodu(Kore)]]></value>
-			<value xml:lang="vi"><![CDATA[Mã số bưu điện(Korean)]]></value>
-			<value xml:lang="mn"><![CDATA[Солонгос хаяг(zip)]]></value>
 		</item>
 		<item name="date">
 			<value xml:lang="ko"><![CDATA[일자(연월일)]]></value>
-			<value xml:lang="en"><![CDATA[date(yyyy/mm/dd)]]></value>
-			<value xml:lang="jp"><![CDATA[日付(年月日)]]></value>
-			<value xml:lang="zh-CN"><![CDATA[日期(年月日)]]></value>
-			<value xml:lang="zh-TW"><![CDATA[日期(年月日)]]></value>
-			<value xml:lang="fr"><![CDATA[Jour(yyyy/mm/dd)]]></value>
-			<value xml:lang="de"><![CDATA[Datum(dd / mm /jjjj)]]></value>
-			<value xml:lang="ru"><![CDATA[Дата(гггг / мм / дд)]]></value>
-			<value xml:lang="es"><![CDATA[fecha(dd/mm/aaaa)]]></value>
-			<value xml:lang="tr"><![CDATA[tarih(gg/aa/yyyy)]]></value>
-			<value xml:lang="vi"><![CDATA[Ngày(yyyy/mm/dd)]]></value>
-			<value xml:lang="mn"><![CDATA[Онсар (Жил сар өдөр)]]></value>
 		</item>
 	</item>
 	<item name="about_default_value">
