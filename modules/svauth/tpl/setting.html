@@ -15,6 +15,17 @@
 				<p id="plugin_srl_help" class="x_help-block" hidden>{$lang->about_auth_plugin}</p>
 			</div>
 		</div>
+
+		<div class="x_control-group">
+			<label class="x_control-label">{$lang->cmd_auth_ignore_member_grp}</label>
+			<div class="x_controls">
+				<!--@foreach($aGroupList as $group_srl => $group_item)-->
+				<label for="grant_{$group_srl}" class="x_inline"><input type="checkbox" class="checkbox" name="ignore_grp_srl_{$group_srl}" id="ignore_grp_srl_{$group_srl}" value="{$group_item->group_srl}" checked="checked"|cond="$config->aIgnoreMemberGrpSrl[$group_item->group_srl]" /> {$group_item->title}</label>
+				<!--@end-->
+				<a href="#auth_ignore_member_grp_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="auth_ignore_member_grp_help" class="x_help-block" hidden>{$lang->about_auth_ignore_member_grp}</p>
+			</div>
+		</div>
 		<div class="x_control-group">
 			<label class="x_control-label" for="skin">{$lang->skin}</label>
 			<div class="x_controls">

@@ -19,33 +19,38 @@ class svauthAdminController extends svauth
 	{
 		$oModuleController = &getController('module');
 		$oModuleModel = &getModel('module');
-		unset($args->act,$args->error_return_url);
-		$config = $oModuleModel->getModuleConfig('svauth');
+		unset($oArgs->act,$oArgs->error_return_url,$oArgs->module);
+		$oConfig = $oModuleModel->getModuleConfig('svauth');
+		unset($oConfig->act,$oConfig->error_return_url,$oConfig->module);
 
 		foreach($oArgs as $k => $v) 
-			$config->{$k} = $v;
-		$output = $oModuleController->insertModuleConfig('svauth',$config);
-		return $output;
+			$oConfig->{$k} = $v;
+		return $oModuleController->insertModuleConfig('svauth',$oConfig);
 	}	
 /**
 * @기본 & 회원모듈 연동 설정저장
 **/
 	function procSvauthAdminInsertConfig()
 	{
-		$args = Context::getRequestVars();
-		if($args->use_mobile != 'Y') 
-			$args->use_mobile = '';
+		$oArgs = Context::getRequestVars();
+		if($oArgs->use_mobile != 'Y') 
+			$oArgs->use_mobile = '';
+		
+		// svauth.controller.triggerInsertDocument() 작동 예외 멤버 그룹 추가
+		$aIgnoreMemberGrpSrl = [];
+		foreach($oArgs as $sLabel=>$sVal)
+		{
+			if(strpos($sLabel, 'ignore_grp_srl_') !== false)
+			{
+				$aIgnoreMemberGrpSrl[$sVal]=$sVal;
+				unset($oArgs->$sLabel);
+			}
+		}
+		$oArgs->aIgnoreMemberGrpSrl = $aIgnoreMemberGrpSrl;
+		unset($aIgnoreMemberGrpSrl);
 
-		$output = $this->_saveModuleConfig($args);
-
-		//$oModuleController = &getController('module');
-		//$oModuleModel = &getModel('module');
-		//unset($args->act,$args->error_return_url);
-		//$config = $oModuleModel->getModuleConfig('svauth');
-
-		//foreach($args as $k => $v) 
-		//	$config->{$k} = $v;
-		//$output = $oModuleController->insertModuleConfig('svauth',$config);
+		$this->_saveModuleConfig($oArgs);
+		unset($oArgs);
 		$this->setMessage('success_updated');
 		$returnUrl = getNotEncodedUrl('', 'module', Context::get('module'), 'act', 'dispSvauthAdminDefaultSetting');
 		$this->setRedirectUrl($returnUrl);

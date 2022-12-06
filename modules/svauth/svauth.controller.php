@@ -50,9 +50,21 @@ class svauthController extends svauth
  **/
 	function triggerInsertMemberBefore(&$obj)
 	{
+		$oLoggedInfo = Context::get('logged_info');
+		if($oLoggedInfo->is_admin == 'Y')  // 최고 관리자가 회원 추가 요청하면 핸드폰 인증하지 않음
+			return new BaseObject();
 		$oModuleModel = &getModel('module');
 		$oConfig = $oModuleModel->getModuleConfig('svauth');
         unset($oModuleModel);
+
+		// 로그인한 회원이 핸드폰 번호 인증 예외 그룹에 속했는지 확인
+		foreach($oLoggedInfo->group_list as $nGrpSrl=>$sGrpLabel)
+		{
+			if($oConfig->aIgnoreMemberGrpSrl[$nGrpSrl])
+				return new BaseObject();
+		}
+		unset($oLoggedInfo);
+
         $nPluginSrl = (int)$oConfig->plugin_srl;
 		if(!$nPluginSrl) // svauth_plugin이 설정되어 있지 않으면 intercept 중지
 			return new BaseObject();

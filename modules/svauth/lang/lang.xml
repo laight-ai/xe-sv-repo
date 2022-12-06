@@ -12,6 +12,10 @@
 	<item name="cmd_auth_plugin">
 		<value xml:lang="ko"><![CDATA[실명인증 플러그인]]></value>
 	</item>
+	<item name="cmd_auth_ignore_member_grp">
+		<value xml:lang="ko"><![CDATA[회원 가입 시 실명인증 예외 그룹]]></value>
+	</item>
+	
 	<item name="cmd_auth_plugin_create">
 		<value xml:lang="ko"><![CDATA[플러그인 생성]]></value>
 	</item>
@@ -119,19 +123,18 @@ is_interested value="1"<BR>
 	</item>
 	<item name="about_svauth">
 		<value xml:lang="ko"><![CDATA[각 실명인증 제공사의 플러그인을 선택하여 사용합니다. svauth addon이 필수입니다. /config/func.inc.php::checkCSRF()에 다음 코드를 추가해야 합니다. $sTargetModule = Context::get('module');	if( $sTargetModule == 'svauth' ) return TRUE;]]]></value>
-		<value xml:lang="en"><![CDATA[You can manage the auth plug-in for each service provider.]]></value>
 	</item>
 	<item name="about_auth_plugin">
 		<value xml:lang="ko"><![CDATA[각 실명인증 제공사의 플러그인을 선택하여 사용합니다.]]></value>
-		<value xml:lang="en"><![CDATA[You can manage the auth plug-in for each service provider.]]></value>
+	</item>
+	<item name="about_auth_ignore_member_grp">
+		<value xml:lang="ko"><![CDATA[선택한 그룹으로 로그인한 상태에서 $oMemberController->insertMember()를 작동시키면<BR>수기 회원 등록 업무이므로 svauth를 작동시키지 않습니다.]]></value>
 	</item>
 	<item name="about_auth_plugin_title">
 		<value xml:lang="ko"><![CDATA[실명인증 플러그인의 표시명을 정의합니다.]]></value>
-		<value xml:lang="en"><![CDATA[You can define auth plug-in title.]]></value>
 	</item>
 	<item name="about_auth_plugin">
 		<value xml:lang="ko"><![CDATA[인증 플러그인을 선택해 주세요.]]></value>
-		<value xml:lang="en"><![CDATA[Select authentication plug-in.]]></value>
 	</item>
 	<item name="about_free_di">
 		<value xml:lang="ko"><![CDATA[동일 정보로 실명 인증을 반복할 수 있도록 허용합니다.]]></value>

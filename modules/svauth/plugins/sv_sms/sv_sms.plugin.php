@@ -310,7 +310,7 @@ class sv_sms extends SvauthPlugin
 		if(strlen($sPhoneNumber) == 0)
 			return new BaseObject(-1, 'msg_no_phone_number');
 		if(strlen($output->data->clue) == 0 || $sPhoneNumber != $output->data->clue)
-			return new BaseObject(-1, '잘못된 전화번호입니다.');
+			return new BaseObject(-1, '요청하신 핸드폰 번호를 svauth.sv_sms plugin이 거부했습니다.');
 		$authentication_1 = Context::get('authcode');
 		$authentication_2 = $output->data->authcode;
 		if($authentication_1 == $authentication_2) // 다른 기기에서 인증코드를 받아서 입력하는 어뷰징 방어

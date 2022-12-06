@@ -15,14 +15,23 @@ class svauthAdminView extends svauth
 		$this->setTemplatePath($this->module_path.'tpl');
 		//모듈설정은 항상 미리세팅
 		$oModuleModel = &getModel('module');
-		$config = $oModuleModel->getModuleConfig('svauth');
-		Context::set('config',$config);
+		$oConfig = $oModuleModel->getModuleConfig('svauth');
+		Context::set('config',$oConfig);
+		unset($oConfig);
 	}
 /**
  * @brief 기본설정
  **/
 	public function dispSvauthAdminDefaultSetting()
 	{
+		// Get a list of groups
+		$oMemberModel = getModel('member');
+		$aGroupList = $oMemberModel->getGroups($module_info->site_srl);
+//var_dump($aGroupList );
+		Context::set('aGroupList', $aGroupList);
+		unset($oMemberModel);
+
+
 		$oSvauthAdminModel = &getAdminModel('svauth');
 		// plugins
 		$oAuthPlugin = $oSvauthAdminModel->getPluginList();
@@ -34,12 +43,14 @@ class svauthAdminView extends svauth
 		Context::set('layout_list', $layout_list);
 		$mobile_layout_list = $oLayoutModel->getLayoutList(0,"M");
 		Context::set('mlayout_list', $mobile_layout_list);
+		unset($oLayoutModel);
 
 		// get skin path
 		$oModuleModel = &getModel('module');
 		$skin_list = $oModuleModel->getSkins($this->module_path);
 		Context::set('skin_list',$skin_list);
 		$mskin_list = $oModuleModel->getSkins($this->module_path, "m.skins");
+		unset($oModuleModel);
 		Context::set('mskin_list', $mskin_list);
 		$this->setTemplateFile('setting');
 	}
