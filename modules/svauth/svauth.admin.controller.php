@@ -22,7 +22,9 @@ class svauthAdminController extends svauth
 		unset($oArgs->act,$oArgs->error_return_url,$oArgs->module);
 		$oConfig = $oModuleModel->getModuleConfig('svauth');
 		unset($oConfig->act,$oConfig->error_return_url,$oConfig->module);
-
+		if(!$oArgs->plugin_srl)  // 회원 가입 시 인증 플러그인 해제 기능
+			unset($oConfig->plugin_srl);
+		
 		foreach($oArgs as $k => $v) 
 			$oConfig->{$k} = $v;
 		return $oModuleController->insertModuleConfig('svauth',$oConfig);
