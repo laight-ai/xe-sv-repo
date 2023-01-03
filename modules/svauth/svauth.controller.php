@@ -7,6 +7,7 @@
 class svauthController extends svauth 
 {
     const MEMBER_MOBILE_AUTH_SRL = 1;
+	const MEMBER_MOBILE_PW_CHANGE_AUTH_SRL = 2;
 /**
  * @brief initialization
  **/
@@ -190,6 +191,7 @@ debugPrint($oRst );
 	}
 /**
  * @brief initiate SMS auth code for member registration only
+ * /modules/member/tpl/js/signup_check.js에서 호출
  **/
 function procSvauthSetAuthCodeMemberAjax()
 {
@@ -216,7 +218,39 @@ function procSvauthSetAuthCodeMemberAjax()
     unset($oMemberRegistrationPluginInfo);    
     unset($oSvauthModel);
 }
-    
+/**
+ * @brief initiate SMS auth code for member password change only
+ * /modules/member/member.controller.php::procMemberRequestSmsAuthAjax()에서 호출
+ **/
+function procSvauthSetSmsAuthCodeMemberPwmodify()
+{
+    $oModuleModel = getModel('module');
+    $oSvauthConfig = $oModuleModel->getModuleConfig('svauth');
+    unset($oModuleModel);
+    $nCertifyPluginSrl = $oSvauthConfig->plugin_srl;
+    $oSvauthModel = getModel('svauth');
+    $oMemberRegistrationPluginInfo = $oSvauthModel->getPlugin($nCertifyPluginSrl);
+    if($oMemberRegistrationPluginInfo->_g_oPluginInfo->plugin == 'sv_sms')
+    {
+        $nPluginSrl = $oMemberRegistrationPluginInfo->_g_oPluginInfo->plugin_srl;
+        $oPlugin = $oSvauthModel->getPlugin($nPluginSrl);
+		$oRst = $oPlugin->setSmsAuthCode(self::MEMBER_MOBILE_PW_CHANGE_AUTH_SRL);
+        unset($oMemberRegistrationPluginInfo);    
+        unset($oSvauthModel);
+		if(!$oRst->toBool()) 
+			return $oRst;
+		
+		// svauth module에서 ajax 호출할 때 반환 
+		$this->setMessage('인증번호를 발송하였습니다.');
+		// svdocs.controller.php::procSvdocsSetAuthCode()에서 호출할 때 반환 
+		$oFinalRst = new BaseObject(0, '인증번호를 발송하였습니다.');
+		$oFinalRst->add('keystr', $oRst->get('keystr'));
+		unset($oRst);
+		return $oFinalRst;
+    }
+    unset($oMemberRegistrationPluginInfo);    
+    unset($oSvauthModel);
+}
 /**
  * @brief validate phone number
  **/

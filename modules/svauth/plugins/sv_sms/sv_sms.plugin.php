@@ -262,7 +262,7 @@ class sv_sms extends SvauthPlugin
 		}
 		else
 		{
-			//$output->add('sms_auth_srl', $nSmsAuthSrl);
+			$output->add('keystr', $keystr);
 			return $output;
 		}
 	}

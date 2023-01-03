@@ -28,6 +28,7 @@
 		
 		<action name="procSvauthSetAuthCode" type="controller" />
         <action name="procSvauthSetAuthCodeMemberAjax" type="controller" />
+		<action name="procSvauthSetAuthCodeMemberPwmodifyAjax" type="controller" />
 		<action name="procSvauthValidateAuthCode" type="controller" />
     </actions>
 </module>
