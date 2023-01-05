@@ -222,7 +222,7 @@ function procSvauthSetAuthCodeMemberAjax()
  * @brief initiate SMS auth code for member password change only
  * /modules/member/member.controller.php::procMemberRequestSmsAuthAjax()에서 호출
  **/
-function procSvauthSetSmsAuthCodeMemberPwmodify()
+function procSvauthSetSmsAuthCodeMemberInquiry()
 {
     $oModuleModel = getModel('module');
     $oSvauthConfig = $oModuleModel->getModuleConfig('svauth');
