@@ -54,6 +54,20 @@ class svauthController extends svauth
 		$oLoggedInfo = Context::get('logged_info');
 		if($oLoggedInfo->is_admin == 'Y')  // 최고 관리자가 회원 추가 요청하면 핸드폰 인증하지 않음
 			return new BaseObject();
+
+		$oMemberModel = getModel('member');
+		$oMemberConfig = $oMemberModel->getMemberConfig();
+		foreach($oMemberConfig->signupForm as $_ => $oAttr)  // 핸폰 번호가 필수 회원 정보가 아니면 인증하지 않음
+		{
+			if($oAttr->name == 'mobile')
+			{
+				if(!$oAttr->mustRequired)
+					return new BaseObject();
+				break;
+			}
+		}
+		unset($oMemberModel);
+
 		$oModuleModel = &getModel('module');
 		$oConfig = $oModuleModel->getModuleConfig('svauth');
         unset($oModuleModel);
