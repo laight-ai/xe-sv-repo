@@ -61,11 +61,12 @@ class svauthController extends svauth
 		{
 			if($oAttr->name == 'mobile')
 			{
-				if(!$oAttr->mustRequired)
+				if(!$oAttr->required)
 					return new BaseObject();
 				break;
 			}
 		}
+		unset($oMemberConfig);
 		unset($oMemberModel);
 
 		$oModuleModel = &getModel('module');
