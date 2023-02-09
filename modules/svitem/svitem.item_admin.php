@@ -437,7 +437,7 @@ class svitemItemAdmin extends svitem
  **/
 	private function _matchNewItemInfo($oNewItemArgs)
 	{
-		$aIgnoreVar = array('error_return_url', 'ruleset', 'module', 'mid', 'act' );
+		$aIgnoreVar = array('error_return_url', 'ruleset', 'module', 'mid', 'act', 'mode');
 		$aCleanupVar = array('ga_brand_name', 'ga_category_name', 'ga_variation_name', 'naver_ep_item_name', 'naver_ep_maker', 'naver_ep_origin', 'naver_ep_search_tag', 'naver_ep_barcode', 'naver_ep_naver_category', 'naver_ep_event_words', 'naver_ep_sv_campaign2', 'naver_ep_sv_campaign3', 'daum_ep_item_name' );
 
 		foreach($oNewItemArgs as $sTitle => $sVal)
