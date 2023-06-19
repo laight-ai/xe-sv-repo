@@ -790,6 +790,10 @@ class svitemItemAdmin extends svitem
 		}
 		// 갤러리 썸네일 이미지를 첨부한 후 저장한 상황에 대응
 		$oFileController->setFilesValid($this->_g_oNewItemHeader->gallery_doc_srl);
+		// PC 상세 페이지 이미지를 첨부한 후 저장한 상황에 대응
+		$oFileController->setFilesValid($this->_g_oNewItemHeader->pc_doc_srl);
+		// MOB 상세 페이지 이미지를 첨부한 후 저장한 상황에 대응
+		$oFileController->setFilesValid($this->_g_oNewItemHeader->mob_doc_srl);
 		unset($oFileController);
 		return new BaseObject();
 	}
