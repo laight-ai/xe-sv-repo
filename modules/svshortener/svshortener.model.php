@@ -38,7 +38,7 @@ class svshortenerModel extends module
 			$aTemp[2] = $output->data->utm_medium_name;
 			// campaign code ÀÛ¼º
 			$aTemp[3] = $this->_g_aSourceAbbreviation[$output->data->utm_source_name].'_'.$this->_g_aMediumAbbreviation[$output->data->utm_medium_name].'_REF_'.$this->_g_aServiceAbbreviation[$output->data->utm_service_name].'_'.$sRegdate;
-			$sUtmTerm = $this->generateUtmTerm($output->data->utm_term, $output->data->blogger_type,$output->data->blogger_id);
+			$sUtmTerm = $this->generateUtmTerm($output->data->blogger_type,$output->data->utm_term,$output->data->blogger_id);
 			$aTemp[4] = $sUtmTerm.'_'.$sRegdate;
 			return $aTemp;
 		}
@@ -54,10 +54,10 @@ class svshortenerModel extends module
 /**
  *
  **/
-	public function generateUtmTerm( $sUtmTerm, $sBloggerType, $sBloggerId )
+	public function generateUtmTerm($sBloggerType, $sUtmTerm, $sBloggerId)
 	{
-		$sFinalUtmTerm = $sUtmTerm.'_'.$this->aBloggerType[$sBloggerType];
-		if( $sBloggerId )
+		$sFinalUtmTerm = $this->aBloggerType[$sBloggerType].'_'.$sUtmTerm;
+		if($sBloggerId)
 			$sFinalUtmTerm .= '_'.$sBloggerId;
 		return $sFinalUtmTerm;
 	}

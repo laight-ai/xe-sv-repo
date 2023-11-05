@@ -34,7 +34,7 @@ if( strlen( $addon_info->shortner_query_name ) > 0 )
 	$oShortnerInfo = $oSvTracker->getShortenerInfo( $addon_info->shortner_query_name );
 	if( $oShortnerInfo ) // 최초 진입 시에만 스크립트 출력
 	{
-		$sShortTrackerScript = "<SCRIPT>setUtmParamsGaectk( '$oShortnerInfo[source]', '$oShortnerInfo[medium]', '$oShortnerInfo[campaign]', '$oShortnerInfo[keyword]', '' );</SCRIPT>";
+		$sShortTrackerScript = "<SCRIPT>_sendGaEventWithoutInteraction('$oShortnerInfo[keyword]');</SCRIPT>";
 		Context::addHtmlFooter( $sShortTrackerScript );
 	}
 	if( $addon_info->debug_mode == 'on' )
