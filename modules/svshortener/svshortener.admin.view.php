@@ -51,7 +51,7 @@ class svshortenerAdminView extends svshortener
 		
 		foreach( $output->data as $key=>$val )
 		{
-			$val->utm_term = $oSvshortenerModel->generateUtmTerm($val->utm_term,$val->blogger_type,$val->blogger_id );
+			$val->utm_term = $oSvshortenerModel->generateUtmTerm($val->blogger_type,$val->utm_term,$val->blogger_id );
 			unset( $val->blogger_type );
 			unset( $val->blogger_id );
 		}
