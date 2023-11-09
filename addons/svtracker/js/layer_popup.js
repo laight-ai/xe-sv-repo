@@ -17,14 +17,14 @@ function layer_open(el, nExpHrs)
 		if (temp.outerWidth() < jQuery(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
 		else temp.css('left', '0px');
 
-		sendDisplayEventGaectk( 'svtracker_layer_popup' );
+		sendDisplayEventGaectk('svtracker_layer_popup');
 		temp.find('a.cbtn').click(function(e){
 			if(bg){
 				jQuery('.layer').fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
 			}else{
 				temp.fadeOut();
 			}
-			sendClickEventGaectk( 'button', 'svtracker_layer_popup_close', '#' );
+			sendClickEventGaectk('btn', 'svtracker_layer_popup_close', '#');
 			_setCookie( sCookieName, 'off', nExpHrs );
 			e.preventDefault();
 		});
@@ -35,7 +35,7 @@ function layer_open(el, nExpHrs)
 			}else{
 				temp.fadeOut();
 			}
-			sendClickEventGaectk( 'button', 'svtracker_layer_popup_cta', '#' );
+			sendClickEventGaectk('btn', 'svtracker_layer_popup_cta', '#');
 			_setCookie( sCookieName, 'off', nExpHrs );
 		});
 

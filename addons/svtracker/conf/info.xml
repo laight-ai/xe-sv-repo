@@ -8,8 +8,8 @@
 	<description xml:lang="en">
 		Set and fix session and cookie according to initial tracking code and referrer
 	</description>
-	<version>0.1.1</version>
-	<date>2023-11-05</date>
+	<version>0.1.2</version>
+	<date>2023-11-09</date>
 	<author email_address="root@singleview.co.kr" link="http://www.singleview.co.kr/">
 		<name xml:lang="ko">Singleview.co.kr</name>
 		<name xml:lang="en">Singleview.co.kr</name>
