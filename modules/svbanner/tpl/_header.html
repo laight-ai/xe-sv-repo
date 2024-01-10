@@ -1,0 +1,15 @@
+<div class="x_page-header">
+	<h1>
+		{$lang->internal_banner_management}
+		<a href="#aboutModule" data-toggle class="x_icon-question-sign">{$lang->help}</a>
+	</h1>
+</div>
+<p class="x_alert x_alert-info" id="aboutModule" hidden>{$lang->about_svbanner}</p>
+<ul cond="$module_info" class="x_nav x_nav-tabs">
+	<li class="x_active"|cond="$act=='dispSvbannerAdminListMid'"><a href="{getUrl('','module',$module,'act','dispSvbannerAdminListMid')}">{$lang->banner_mid_list}</a></li>
+	<li class="x_active"|cond="$act=='dispSvbannerAdminListClient' && !$module_srl"><a href="{getUrl('','module',$module,'act','dispSvbannerAdminListClient')}">{$lang->banner_client_list}</a></li>
+	<li class="x_active"|cond="$act=='dispSvbannerAdminConfig'"><a href="{getUrl('','module',$module, 'act','dispSvbannerAdminConfig','module_srl','')}">{$lang->basic_settings}</a></li>
+</ul>
+<ul cond="$module_srl" class="x_nav x_nav-tabs">
+	<li class="x_active"|cond="$act=='dispSvbannerAdminListPkgByMid'"><a href="{getUrl('act','dispSvbannerAdminListPkgByMid')}">{$module_info->mid}의 {$lang->package_list}</a></li>
+</ul>
