@@ -19,6 +19,7 @@ class svshortenerAdminView extends svshortener
  **/
 	function dispSvshortenerAdminIndex() 
 	{
+		$args = new stdClass();
 		$args->page = Context::get('page');
 		$search_target_list = array('s_applicant_name','s_applicant_phone_number');
 		$search_target = Context::get('search_target');
