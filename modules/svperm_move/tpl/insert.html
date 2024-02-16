@@ -1,0 +1,24 @@
+<include target="_header.html" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+        <p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<form class="x_form-horizontal" action="./" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="module" value="{$module}" />
+	<input type="hidden" name="act" value="procSvperm_movedminInsert" />
+	<section class="section">
+		<h1>{$lang->permanent_move_url_setting}</h1>
+		<div class="x_control-group">
+			<label class="x_control-label" for="">{$lang->permanent_move_url_info}</label>
+			<div class="x_controls">
+				<textarea name="permanent_move_url_info" id="permanent_move_url_info" rows="10" cols="300" style='width: 600px;' placeholder='{$lang->about_permanent_move_url_info}'></textarea>
+				<a href="#permanent_move_url_info_help" class="x_icon-question-sign" data-toggle>{$lang->help}</a>
+				<p id="permanent_move_url_info_help" class="x_help-block" hidden>{$lang->about_permanent_move_url_info}</p>
+			</div>
+		</div>
+	</section>
+	<div class="x_clearfix btnArea">
+		<button class="x_btn x_btn-primary" type="submit">{$lang->cmd_registration}</button>
+	</div>
+</form>

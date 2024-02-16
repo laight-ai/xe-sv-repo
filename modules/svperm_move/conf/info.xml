@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.2">
+	<title xml:lang="ko">싱글뷰 301 permanent move</title>
+	<description xml:lang="ko">301 permanent move를 관리합니다.</description>
+	<version>0.0.1</version>
+	<date>2024-02-16</date>
+	<category>service</category>
+	<author email_address="root@singleview.co.kr" link="http://singleview.co.kr">
+        <name xml:lang="ko">Singleview.co.kr</name>
+    </author>
+</module>

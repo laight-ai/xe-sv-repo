@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="svperm_move_management">
+		<value xml:lang="ko"><![CDATA[URL 301 move 관리]]></value>
+	</item>
+	<item name="about_svperm_move">
+		<value xml:lang="ko"><![CDATA[URL 301 move 목록을 관리합니다.]]></value>
+	</item>
+	<item name="permanent_move_url_setting">
+		<value xml:lang="ko"><![CDATA[신규 URL 301 move 항목 입력]]></value>
+	</item>
+	<item name="permanent_move_url_info">
+		<value xml:lang="ko"><![CDATA[신규 URL 정보]]></value>
+	</item>
+	<item name="about_permanent_move_url_info">
+		<value xml:lang="ko"><![CDATA[old mid, old document_srl, target_full_url 줄바꿈 형식으로 입력하세요.]]></value>
+	</item>
+	
+</lang>

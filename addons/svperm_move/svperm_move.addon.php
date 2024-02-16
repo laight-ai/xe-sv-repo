@@ -5,21 +5,20 @@ if(!defined('__XE__'))
 	exit();
 
 /**
- * @file ange_perm_move.addon.php
+ * @file perm_move.addon.php
  * @author singleview.co.kr (root@singleview.co.kr)
- * @brief ange_perm_move add-on
+ * @brief perm_move add-on
  */
 // Execute if called_position is before_display_content
 if(!defined( '__ZBXE__' ) )
 	exit();
 
 $sMid = Context::get('mid');
-if($sMid != 'usr' && $sMid != 'mobile')
-	return;
+$nDocumentSrl = Context::get('document_srl');
 
-// https://ange.co.kr/usr/?menu=story201&submenu=story_detail&NO=9226
-// $sMenu = Context::get('menu');
-// $sSubmenu = Context::get('submenu');
+//var_dump($sMid );
+//var_dump($nDocumentSrl );
+
 $sNo = Context::get('NO');
 if(strlen($sNo))
 {
@@ -32,5 +31,5 @@ if(strlen($sNo))
 	header('Location: https://ange.co.kr/'.$sDestUrl);
 	exit;
 }
-/* End of file ange_perm_move.addon.php */
-/* Location: ./addons/ange_perm_move/ange_perm_move.addon.php */
+/* End of file perm_move.addon.php */
+/* Location: ./addons/perm_move/perm_move.addon.php */

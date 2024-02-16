@@ -1,0 +1,7 @@
+<table name="svperm_move">
+	<column name="perm_srl" type="number" size="11" notnull="notnull" primary_key="primary_key" auto_increment="auto_increment"/>
+	<column name="mid" type="varchar" size="32" notnull="notnull" />
+	<column name="document_srl" type="number" size="11" />
+	<column name="target_url" type="varchar" size="255" notnull="notnull" />
+	<column name="regdate" type="date" notnull="notnull" />
+</table>
