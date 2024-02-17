@@ -1,0 +1,11 @@
+<query id="insertAdmin301Url" action="insert">
+	<tables>
+		<table name="svperm_move" />
+	</tables>
+	<columns>
+		<column name="mid" var="mid" notnull="notnull" />
+		<column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
+        <column name="target_url" var="target_url" notnull="notnull" />
+		<column name="regdate" var="regdate" default="curdate()" />
+	</columns>
+</query>

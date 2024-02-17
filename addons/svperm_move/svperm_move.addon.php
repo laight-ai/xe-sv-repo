@@ -15,21 +15,21 @@ if(!defined( '__ZBXE__' ) )
 
 $sMid = Context::get('mid');
 $nDocumentSrl = Context::get('document_srl');
-
-//var_dump($sMid );
-//var_dump($nDocumentSrl );
-
-$sNo = Context::get('NO');
-if(strlen($sNo))
+if( strlen($sMid) && intval($nDocumentSrl) )
 {
-	$aPermanentMove = ['9226'=>'maternity/308',];
-	$sDestUrl = '';
-	if(array_key_exists($sNo, $aPermanentMove))
-		$sDestUrl = $aPermanentMove[$sNo];
+	$s301TargetUrl = null;
+	if(getClass('svperm_move'))
+	{
+		$oSvperm_moveModel = getModel('svperm_move');
+		$s301TargetUrl = $oSvperm_moveModel->get301Url( $sMid, $nDocumentSrl );
+	}
 
-	header('HTTP/1.1 301 Moved Permanently');
-	header('Location: https://ange.co.kr/'.$sDestUrl);
-	exit;
+	if(!is_null($s301TargetUrl))
+	{
+		header('HTTP/1.1 301 Moved Permanently');
+		header('Location: '.$s301TargetUrl);
+		exit;
+	}
 }
 /* End of file perm_move.addon.php */
 /* Location: ./addons/perm_move/perm_move.addon.php */

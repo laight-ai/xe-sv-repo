@@ -1,0 +1,11 @@
+<query id="insert301Log" action="insert">
+	<tables>
+		<table name="svperm_log" />
+	</tables>
+	<columns>
+		<column name="http_referer" var="http_referer" />
+		<column name="request_uri" var="request_uri" />
+        <column name="target_url" var="target_url" />
+		<column name="regdate" var="regdate" default="curdate()" />
+	</columns>
+</query>

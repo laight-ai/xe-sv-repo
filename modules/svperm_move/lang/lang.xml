@@ -15,5 +15,10 @@
 	<item name="about_permanent_move_url_info">
 		<value xml:lang="ko"><![CDATA[old mid, old document_srl, target_full_url 줄바꿈 형식으로 입력하세요.]]></value>
 	</item>
-	
+	<item name="target_url">
+		<value xml:lang="ko"><![CDATA[도착 URL]]></value>
+	</item>
+	<item name="msg_error_svperm_move_duplicated_source_url">
+		<value xml:lang="ko"><![CDATA[%s와 %d는 이미 등록된 mid와 document_srl입니다.]]></value>
+	</item>
 </lang>

@@ -5,6 +5,6 @@
 	<actions>
 		<action name="dispSvperm_moveAdminIndex" type="view" menu_name="setting" menu_index="true" admin_index="true" />
 		<action name="dispSvperm_moveAdminInsert" type="view" />
-		<action name="procSvperm_moveAdminConfig" type="controller" />
+		<action name="procSvperm_moveAdminInsert" type="controller" />
 	</actions>
 </module>
