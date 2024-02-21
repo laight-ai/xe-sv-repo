@@ -1,7 +1,7 @@
 <table name="svperm_log">
 	<column name="log_srl" type="number" size="11" notnull="notnull" primary_key="primary_key" auto_increment="auto_increment"/>
-	<column name="http_referer" type="varchar" size="255" unique="uniq_mid_document_srl_regdate" />
-	<column name="request_uri" type="varchar" size="255" unique="uniq_mid_document_srl_regdate" />
+	<column name="http_referer" type="varchar" size="100" unique="uniq_log" />
+	<column name="request_uri" type="varchar" size="100" unique="uniq_log" />
 	<column name="target_url" type="varchar" size="255" />
-	<column name="regdate" type="date" notnull="notnull" unique="uniq_mid_document_srl_regdate" />
+	<column name="regdate" type="date" notnull="notnull" unique="uniq_log" />
 </table>
