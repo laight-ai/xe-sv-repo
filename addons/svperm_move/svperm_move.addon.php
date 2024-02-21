@@ -13,15 +13,17 @@ if(!defined('__XE__'))
 if(!defined( '__ZBXE__' ) )
 	exit();
 
-$sMid = Context::get('mid');
+//$sMid = Context::get('mid');
 $nDocumentSrl = Context::get('document_srl');
-if( strlen($sMid) && intval($nDocumentSrl) )
+//if( strlen($sMid) && intval($nDocumentSrl) )
+if( intval($nDocumentSrl) )
 {
 	$s301TargetUrl = null;
 	if(getClass('svperm_move'))
 	{
 		$oSvperm_moveModel = getModel('svperm_move');
-		$s301TargetUrl = $oSvperm_moveModel->get301Url( $sMid, $nDocumentSrl );
+		//$s301TargetUrl = $oSvperm_moveModel->get301Url( $sMid, $nDocumentSrl );
+		$s301TargetUrl = $oSvperm_moveModel->get301Url( $nDocumentSrl );
 	}
 
 	if(!is_null($s301TargetUrl))

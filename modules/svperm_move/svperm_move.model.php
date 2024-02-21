@@ -10,10 +10,11 @@ class svperm_moveModel extends svperm_move
  * @brief 
  * @return
  */
-	public function get301Url($sMid, $nDocumentSrl)
+	//public function get301Url($sMid, $nDocumentSrl)
+	public function get301Url($nDocumentSrl)
 	{
 		$oDbParam = new stdClass();
-		$oDbParam->mid = trim($sMid);
+		//$oDbParam->mid = trim($sMid);
 		$oDbParam->document_srl = intval($nDocumentSrl);
 		$oRst = executeQuery('svperm_move.get301Url', $oDbParam);
 		unset($oDbParam);
