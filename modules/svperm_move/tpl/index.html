@@ -53,7 +53,14 @@ jQuery(function($){
 		<tr class="row{$cycle_idx}">
 			<td>{$no}</td>
 			<td>{$val->mid}</td>
-			<td>{$val->document_srl}</td>
+			<td>
+{@
+if( $val->document_srl == '0' )
+	echo '모듈';
+else
+	echo $val->document_srl;
+}
+			</td>
 			<td><a href='{$val->target_url}' target='_blank'>target url</a></td>
 			<td>{zdate($val->regdate,"Y-m-d")}</td>
 		</tr>
