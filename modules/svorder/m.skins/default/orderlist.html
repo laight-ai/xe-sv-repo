@@ -35,7 +35,7 @@
 			{@$count = 1}
 		</block>
 		<div cond="$count==1" class="date_detail">
-			<div cond="$no==0" rowspan="{count($order_arr)}">
+			<div cond="$no==0" rowspan="{count((array)$order_arr)}">
 				<div class="order_date">{zdate($val->purdate,'Y-m-d')} (<a href="{getUrl('act','dispNstoreOrderDetail','order_srl',$val->order_srl)}">{$val->order_srl}</a>)</div>
 			</div>		
 			<div class="delivery">
@@ -48,7 +48,7 @@
 				<div>{$val->item_name}</div>
 				<div cond="$val->option_srl">{$val->option_title} ({$val->printPrice($val->option_price)})</div>
 			</div>
-			<div cond="$count == count($order_arr)" class="order_price">
+			<div cond="$count == count((array)$order_arr)" class="order_price">
 				<span class="order_area">{$order_status[$val->order_status]}</span>
 				<div class="order_quantity">
 					<span class="quantity">{number_format($val->quantity)}</span>개 / <span class="quantity">{nproductItem::formatMoney($val->quantity * $val->discounted_price)}</span>
@@ -61,7 +61,7 @@
 		{@$count++}
 	</div>
 	</block>
-	<div cond="!count($order_list)">
+	<div cond="!count((array)$order_list)">
 		<div>{$lang->msg_no_orders}</div>
 	</div>
 

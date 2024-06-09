@@ -280,19 +280,21 @@ class svpromotionModel extends module
 		if( !$nMemberSrl )
 			return new BaseObject(-1, 'msg_invalid_member_srl' );
 		
+		$args = new stdClass();
 		$args->member_srl = (int)$nMemberSrl;
 		$output = executeQueryArray( 'svpromotion.getCouponListByMemberSrl', $args );
+		unset( $args );
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svpromtion_coupon_db_query');
 
 		$aPromotionInfo = array();
+		$oRst = new stdClass();
 		$oRst->coupon_list = array();
 		$nCouponIdx = 0;
 		//$nPromotionSrl = $output->data[1]->promotion_srl;
 		if( count( $output->data ) > 0 )
 		{
 			$oSvitemModel = &getModel('svitem');
-			unset( $args );
 			foreach( $output->data as $key=>$val )
 			{
 				if( $aPromotionInfo[$val->promotion_srl] )
@@ -1392,7 +1394,7 @@ var_dump( $oConditionalPromoResult );
 		$args->email_domain = $aMemeberEmailInfo;
 		$oEmailDomainDiscountInfo = executeQuery('svpromotion.getMemberDiscountInfoByEmailDomain', $args );
 		
-		if( count( $oEmailDomainDiscountInfo->data ) )
+		if( count( (array)$oEmailDomainDiscountInfo->data ) )
 		{
 			$output = new BaseObject();
 			$output->data->opt = $oEmailDomainDiscountInfo->data->opt;

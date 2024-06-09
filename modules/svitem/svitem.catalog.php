@@ -48,10 +48,12 @@ class catalogList
 
 	public function __construct()
 	{
+		$oNodeInfo = new stdClass();
 		$oNodeInfo->node_srl=0;
 		$oNodeInfo->catalog_name='root';
 		$oNodeInfo->belonged_item_count=0;
 		$this->_g_oRoot = new catalogNode($oNodeInfo);
+		unset($oNodeInfo);
 		$this->_g_nTotalNodes = 0;
 	}
 	public function isEmpty()
@@ -101,6 +103,7 @@ class catalogList
 		$bRst = $this->_findNode($this->_g_oRoot, $nNodeSrlToFind);
 		if( $bRst )
 		{
+			$oCurNodeRst = new stdClass();
 			$oCurNodeRst->node_srl = $this->_g_oFoundNode->g_nCatNodeSrl;
 			$oCurNodeRst->node_name = $this->_g_oFoundNode->g_sCatName;
 			$oCurNodeRst->direct_belonged_item_cnt = $this->_g_oFoundNode->g_nBelongedItemCnt;

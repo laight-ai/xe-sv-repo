@@ -454,7 +454,7 @@ class svitemModel extends svitem
 			}
 		}
 		$aQnas->mid = $oQnaBoardConfig->mid;
-		if(count($aQnas->data))
+		if(count((array)$aQnas->data))
 		{
 			$aQnas->qnas_per_page = $oConfig->qnas_per_page ? $oConfig->qnas_per_page : 2;
 			$aQnas->remaining_qnas = $nCurrentQna - $nLoadQnaCount;
@@ -560,7 +560,7 @@ class svitemModel extends svitem
 				}
 			}
 		}
-		if(!count($aReviews->data))
+		if(!count((array)$aReviews->data))
 			return null;
 
 		$aReviews->mid = $oReviewBoardConfig->mid;
@@ -963,10 +963,12 @@ class svitemModel extends svitem
 			return;
 		foreach( $output->data as $key=>$val)
 		{
+			$oItemArgs = new stdClass();
 			$oItemArgs->module_srl = $nModuleSrl;
 			$oItemArgs->category_node_srl = $val->category_node_srl;
 			$oItemArgs->display = 'Y';
 			$oItemListByCategorySrl = executeQueryArray('svitem.getItemListByCategorySrl', $oItemArgs);
+			unset($oItemArgs);
 			$nCurCatalogBelongedItemCnt = count($oItemListByCategorySrl->data);
 			$output->data[$key]->belonged_item_count = $nCurCatalogBelongedItemCnt; 
 		}
@@ -975,11 +977,13 @@ class svitemModel extends svitem
 		$oCatalog = new catalogList();
 		foreach( $output->data as $key=>$val) // 카탈로그 아이템을 연결리스트로 변환
 		{
+			$oArgs = new stdClass();
 			$oArgs->node_srl = $val->category_node_srl;
 			$oArgs->parent_srl = $val->parent_srl;
 			$oArgs->catalog_name = $val->category_name;
 			$oArgs->belonged_item_count = $val->belonged_item_count;
 			$bRet = $oCatalog->insertNode($oArgs);
+			unset($oArgs);
 		}
 		
 		$nBelongedItemCount = 0;

@@ -50,8 +50,8 @@
 		{@$total_price=0}
 		<tbody>
 			<block loop="$order_list=>$order_srl,$order_arr">
-			<tr loop="$order_arr=>$no,$val" class="gt2"|cond="count($order_arr)>1">
-				<td cond="$no==0" rowspan="{count($order_arr)}">
+			<tr loop="$order_arr=>$no,$val" class="gt2"|cond="count((array)$order_arr)>1">
+				<td cond="$no==0" rowspan="{count((array)$order_arr)}">
 					<div>{zdate($val->purdate,'Y-m-d')}</div>
 					<div>(<a href="{getUrl('act','dispNstoreOrderDetail','order_srl',$val->order_srl)}">{$val->order_srl}</a>)</div>
 				</td>
@@ -74,7 +74,7 @@
 				{@$total_price+=$val->price}
 			</tr>
 			</block>
-			<tr cond="!count($order_list)">
+			<tr cond="!count((array)$order_list)">
 				<td colspan="7">{$lang->msg_no_orders}</td>
 			</tr>
 		</tbody>

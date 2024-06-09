@@ -241,11 +241,13 @@ class svorderView extends svorder
 
 		Context::set('startdate', $sStartdate);
 		Context::set('enddate', $sEnddate);
+		$oOrderArgs = new stdClass();
 		$oOrderArgs->member_srl = $oLoggedInfo->member_srl;
 		$oOrderArgs->startdate = $sStartdate;
 		$oOrderArgs->enddate = $sEnddate;
 		
 		$aOrderList = $oSvorderModel->getOrderedList( $oOrderArgs );
+		unset($oOrderArgs);
 		$oSvpromotionModel = &getModel('svpromotion');
 		foreach( $aOrderList as $key => $val )
 		{
@@ -287,11 +289,13 @@ class svorderView extends svorder
 		
 		setCookie('svorder_guest_buy_pw', $sGuestPassword); /// 폐기 예정
 		$_SESSION['svorder_guest_buy_pw'] = $sGuestPassword;
-
+		
+		$oOrderArgs = new stdClass();
 		$oOrderArgs->member_srl = 0;
 		$oOrderArgs->non_order_srl = $nGuestOrderSrl;
 		$oSvorderModel = &getModel('svorder');
 		$aOrderList = $oSvorderModel->getOrderedList( $oOrderArgs );
+		unset($oOrderArgs);
 		Context::set('order_list', $aOrderList);
 		Context::set('order_status', $oSvorderModel->getOrderStatusLabel());
 		Context::set('delivery_inquiry_urls', $this->delivery_inquiry_urls);
