@@ -1,0 +1,36 @@
+<block cond="!count($oItemInfo->aGalleryImg)">
+	<div id="item-thumb" class="item-thumb">
+		<div class="item">
+			<img src="./modules/svitem/m.skins/trendshop/img/no_img_720x720.jpg" />
+		</div>
+	</div>
+</block>
+<block cond="count($oItemInfo->aGalleryImg)">
+	<block loop="$oItemInfo->aGalleryImg=>$key,$val">
+		{@
+			$thumbnail_path = sprintf('files/thumbnails/%s',getNumberingPath($module_info->module_srl, 3));
+			$visual_source[$key] = strstr($val, 'files/');
+			$visual_sfname[$key] = substr($visual_source[$key], 24, -4);
+			$visual_file[$key] = sprintf('%s%s_r%dx%d.png', $thumbnail_path, $visual_sfname[$key], $module_info->thumbnail_width, $module_info->thumbnail_height);
+			$visual_url[$key] = Context::getRequestUri().$visual_file[$key];
+			if(!file_exists($visual_file[$key])) $output = FileHandler::createImageFile($visual_source[$key], $visual_file[$key], $module_info->thumbnail_width, $module_info->thumbnail_height, 'png', $module_info->thumbnail_type);
+			$visual_file2[$key] = sprintf('%s%s_r%dx%d.png', $thumbnail_path, $visual_sfname[$key], 80, 80);
+			$visual_url2[$key] = Context::getRequestUri().$visual_file2[$key];
+			if(!file_exists($visual_file2[$key])) $output = FileHandler::createImageFile($visual_source[$key], $visual_file2[$key], 80, 80, 'png', 'crop');
+		}
+	</block>
+</block>
+<div id="item-thumb" class="item-thumb">
+	<div loop="$oItemInfo->aGalleryImg=>$key,$val" class="item">
+		<img src="{$visual_url[$key]}" />
+	</div>
+</div>
+<div class="item-thumb-list">
+	<ul id="item-thumb-list">
+		{@ $fileii=0}
+		<li loop="$oItemInfo->aGalleryImg=>$key,$val">
+			<a class="active"|cond="$fileii==0"><img src="{$visual_url2[$key]}"></a>
+			{@ $fileii++}
+		</li>
+	</ul>
+</div>

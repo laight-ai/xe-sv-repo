@@ -1,0 +1,17 @@
+<div id="item-list-title" class="item-list-title newclearfix">
+	<h2>
+		<block loop="$parent_catalog_list=>$key,$val">
+			<!--@if($val->node_srl == 0)-->
+				<a href="/{$mid}/#item-list-title">{$mid}</a> > 
+			<!--@else-->
+				<a href="/{$mid}/Catalog/{$val->node_srl}#item-list-title">{$val->node_name}</a> > 
+			<!--@endif-->
+		</block>
+	</h2>
+	<div class="category-list newclearfix">
+		<ul>
+			<li class="cate" cond="$current_catalog_info->node_srl!=0"><a class="current">{$current_catalog_info->node_name}</a> <block cond="$children_catalog_list">></block> </li>
+			<li class="cate" loop="$children_catalog_list=>$no,$val"><a href="/{$mid}/Catalog/{$val->child_node_srl}#item-list-title">{$val->child_node_name} ({$val->child_item_cnt}개 상품)</a></li>
+		</ul>
+	</div>
+</div>

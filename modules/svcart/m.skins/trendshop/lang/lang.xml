@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="order">
+		<value xml:lang="ko"><![CDATA[주문]]></value>
+		<value xml:lang="en"><![CDATA[Order]]></value>
+		<value xml:lang="jp"><![CDATA[ご注文]]></value>
+		<value xml:lang="zh-TW"><![CDATA[購買]]></value>		
+	</item>
+	<item name="order_cancelled">
+		<value xml:lang="ko"><![CDATA[주문취소]]></value>
+		<value xml:lang="en"><![CDATA[Order Canceled]]></value>
+	</item>
+	<item name="selected_delete">
+		<value xml:lang="ko"><![CDATA[선택 삭제]]></value>
+		<value xml:lang="en"><![CDATA[Select Delete]]></value>
+		<value xml:lang="jp"><![CDATA[Select Delete]]></value>
+		<value xml:lang="zh-TW"><![CDATA[選擇刪除]]></value>		
+	</item>
+	<item name="in_cart">
+		<value xml:lang="ko"><![CDATA[담기]]></value>
+		<value xml:lang="en"><![CDATA[Cart]]></value>
+	</item>
+	<item name="order_options">
+		<value xml:lang="ko"><![CDATA[옵션]]></value>
+		<value xml:lang="en"><![CDATA[Option]]></value>
+		<value xml:lang="jp"><![CDATA[オプション]]></value>
+		<value xml:lang="zh-TW"><![CDATA[加購選項]]></value>				
+	</item>
+	<item name="payment_options">
+		<value xml:lang="ko"><![CDATA[결제옵션]]></value>
+		<value xml:lang="en"><![CDATA[Pyment Options]]></value>
+	</item>
+	<item name="payment_amount">
+		<value xml:lang="ko"><![CDATA[총 결제금액]]></value>
+		<value xml:lang="en"><![CDATA[Payment amount]]></value>
+		<value xml:lang="jp"><![CDATA[最終決済金閣]]></value>
+		<value xml:lang="zh-TW"><![CDATA[應付金額]]></value>		
+	</item>
+	<item name="payment_method">
+		<value xml:lang="ko"><![CDATA[결제하기]]></value>
+		<value xml:lang="en"><![CDATA[Method of payment]]></value>
+	</item>
+	<item name="free_delivery">
+		<value xml:lang="ko"><![CDATA[무료]]></value>
+		<value xml:lang="en"><![CDATA[Free]]></value>
+	</item>
+	<item name="wish_list">
+		<value xml:lang="ko"><![CDATA[찜목록]]></value>
+		<value xml:lang="en"><![CDATA[WISH LIST]]></value>
+		<value xml:lang="jp"><![CDATA[お気に入り]]></value>
+		<value xml:lang="zh-TW"><![CDATA[有興趣品項]]></value>			
+	</item>
+	<item name="wish_delete">
+		<value xml:lang="ko"><![CDATA[삭제]]></value>
+		<value xml:lang="en"><![CDATA[Delete]]></value>
+	</item>
+	<item name="mileage_saved">
+		<value xml:lang="ko"><![CDATA[마일리지 적립]]></value>
+		<value xml:lang="en"><![CDATA[Saved mileage]]></value>
+	</item>
+	<item name="about_bankaccount_info">
+		<value xml:lang="ko"><![CDATA[<em>입금</em>하시면 주문완료 됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[The order will be done as soon as your payment deposit is confirmed.]]></value>
+		<value xml:lang="jp"><![CDATA[下記の口座に入金して頂くとご注文が完了されます。]]></value>
+		<value xml:lang="zh-TW"><![CDATA[一旦完成付款此次訂單即確認。]]></value>			
+	</item>
+	<item name="about_order_complete">
+		<value xml:lang="ko"><![CDATA[<em>결제</em>가 잘 이루어졌습니다.]]></value>
+		<value xml:lang="en"><![CDATA[<em>The payment</em> is completed.]]></value>
+	</item>
+	<item name="go_home">
+		<value xml:lang="ko"><![CDATA[홈으로]]></value>
+		<value xml:lang="en"><![CDATA[Go Home]]></value>
+	</item>
+	<item name="about_order_number">
+		<value xml:lang="ko"><![CDATA[* 비회원 주문 배송조회시 꼭 필요합니다.]]></value>
+		<value xml:lang="en"><![CDATA[* The order number is required to track for non-member. Please do not forget.]]></value>
+		<value xml:lang="jp"><![CDATA[*ご注文番号は非会員の発送追跡のため必ず必要になります。紛失しないように注意してください]]></value>
+		<value xml:lang="zh-TW"><![CDATA[當一個非會員訂單查詢,必需有訂單號碼。請不要丟失訂單號碼。]]></value>			
+	</item>
+	<item name="addr_select">
+		<value xml:lang="ko"><![CDATA[선택]]></value>
+		<value xml:lang="en"><![CDATA[Select]]></value>
+	</item>
+	<item name="back">
+		<value xml:lang="ko"><![CDATA[뒤로가기]]></value>
+		<value xml:lang="en"><![CDATA[BACK]]></value>
+	</item>
+</lang>

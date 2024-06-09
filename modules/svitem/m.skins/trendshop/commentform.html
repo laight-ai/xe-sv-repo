@@ -1,0 +1,29 @@
+<load target="css/itemdetail.css" />
+<load target="../../tpl/skin.filter/insert_comment.xml" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<div cond="$oSourceComment->isExists()" class="source-comment">
+	<div class="scmt-info">{$oSourceComment->getNickName()} | {$oSourceComment->getRegdate("Y.m.d")}<block cond="$grant->manager"> | IP {$oSourceComment->get('ipaddress')}</block></div>
+	{$oSourceComment->getContent(false)}
+</div>
+
+<form action="./" method="post" class="boardEditor" ruleset="insertComment">
+	<input type="hidden" name="act" value="procSvitemInsertComment" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="item_srl" value="{$item_srl}" />
+	<input type="hidden" name="document_srl" value="{$oComment->get('document_srl')}" />
+	<input type="hidden" name="comment_srl" value="{$oComment->get('comment_srl')}" />
+	<input type="hidden" name="content" value="{htmlspecialchars($oComment->get('content'))}" />
+	<input type="hidden" name="parent_srl" value="{$oComment->get('parent_srl')}" />
+
+	<div class="boardWrite commentEditor">
+		<div class="editor">{$oComment->getEditor()}</div>
+		<div class="cmt-btn-area">
+			<button type="submit" class="cmt-btn cmt-btn-submit">{$lang->cmd_comment_registration}</button>
+			<a href="javascript:history.go(-1)" class="cmt-btn cmt-btn-cancel">{$lang->cmd_cancel}</a>
+		</div>
+	</div>
+</form>

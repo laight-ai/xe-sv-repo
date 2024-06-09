@@ -1,0 +1,82 @@
+<!---div class="write-open">
+	<a href="#" id="review-write">{$lang->review_write}</a>
+</div--->
+
+<div cond="!$is_logged" id="review-form" class="message-form">{$lang->msg_login_required}</div>
+
+<form cond="$is_logged" action="./" method="post" onsubmit="return procFilter(this, insert_review)" id="review-form" class="commentForm">
+	<input type="hidden" name="vid" value="{$vid}" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="item_srl" value="{$item_srl}" />
+	<input type="hidden" name="document_srl" value="{$oItemInfo->document_srl}" />
+	<input type="hidden" name="star_point" value="" />
+
+	<table class="view_type1">
+		<tbody>
+			<tr class="write-about">
+				<td>
+					<ul class="starPoint">
+						<li><a href="#" onclick="return false;" rel="1">1</a></li>
+						<li><a href="#" onclick="return false;" rel="2">2</a></li>
+						<li><a href="#" onclick="return false;" rel="3">3</a></li>
+						<li><a href="#" onclick="return false;" rel="4">4</a></li>
+						<li><a href="#" onclick="return false;" rel="5">5</a></li>
+					</ul>
+				</td>
+				<td>
+					<!--@if($config->review_bonus)-->{sprintf($lang->about_review_bonus,number_format($config->review_bonus))}<!--@else-->{$lang->about_review}<!--@endif-->
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea name="content" class="commentArea"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="write-button">
+		<input type="submit" value="{$lang->review_com}" accesskey="s" id="review-com" />
+		<a href="#" id="review-cancel">{$lang->cancel}</a>
+	</div>
+
+</form>
+
+<!--@if(count((array)$review_list))-->
+<script>
+function _sendGotoReviewClickEvent()
+{
+	var sTmpTitle = 'mob_indetail_page_goto_review_menu';
+	sendClickEventGaectk( 'link', sTmpTitle, '#');
+}
+function _sendReviewClickEvent(nReviewSrl)
+{
+	var sTmpTitle = 'mob_indetail_page_goto_review_'+nReviewSrl;
+	sendClickEventGaectk( 'link', sTmpTitle, '#');
+}
+</script>
+	<div id="review-list" class="reviews row">
+		<ul class="col-xs-12">
+			{@ $listi=0; $morei=1; }
+			<li cond="$remaining_review>0" class="list-page list-page1">
+				<div class="review-info">
+				<a  href="{getUrl('mid',$review_board_mid,'category',$review_category_srl, 'document_srl','')}" onclick="_sendGotoReviewClickEvent();">후기 게시판의 {$remaining_review}개 리뷰 더보기</A>
+				</div>
+			</li>
+			<li loop="$review_list=>$key,$review" id="review_{$key}" class="list-page list-page{$morei}<!--@if($morei > 1)--> list-hidden<!--@endif-->">
+				<div class="review-info">
+					{$review->nick_name} | {zdate($review->regdate, 'Y-m-d')} &nbsp;<span class="estimate"><!--@for($i=0;$i<5;$i++)--><!--@if($i<$review->voted_count)--><img src="./img/star.png" alt="" /><!--@end--><!--@end--></span>
+				</div>
+				<div class="review-content"><a href="{getUrl('mid',$review_board_mid,'document_srl',$key)}" onclick="_sendReviewClickEvent('{$key}');" target='_new'>{$review->title} ({$lang->read_review_in_detail})</a></div>
+				<div class="review-del"><a cond="$review->isGranted" href="{getUrl('act','procSvitemDeleteReview','item_srl',$oItemInfo->item_srl,'review_srl',$review->review_srl)}" onclick="if(confirm('{$lang->confirm_delete}')) {return true;} else {return false;}"><img src="img/del.png" style="width:7px; height:7px" title="{$lang->cmd_delete}" /></a></div>
+				{@ $listi++}
+				<block cond="$listi% $reviews_per_page ==0">{@ $morei++}</block>
+			</li>
+			<block cond="$listi% $reviews_per_page==0">{@ $morei--}</block>
+		</ul>
+	</div>
+	<div cond="$morei > 1" id="review-page-num">
+		<a loop="$i=1; $i-1<$morei; $i++" href="#" class="on"|cond="$i==1">{$i}</a> 
+	</div>
+<!--@else-->
+	<div class="no-comment">{$lang->msg_no_reviews}.</div>
+<!--@endif-->

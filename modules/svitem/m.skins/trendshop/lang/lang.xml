@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="all_cate">
+		<value xml:lang="ko"><![CDATA[ALL]]></value>
+		<value xml:lang="en"><![CDATA[ALL]]></value>
+	</item>
+	<item name="cmd_order_bestsell">
+		<value xml:lang="ko"><![CDATA[구매자순]]></value>
+		<value xml:lang="en"><![CDATA[Best seller]]></value>
+		<value xml:lang="jp"><![CDATA[購買者が多い順]]></value>
+		<value xml:lang="zh-TW"><![CDATA[熱門商品]]></value>			
+	</item>
+	<item name="cmd_order_review">
+		<value xml:lang="ko"><![CDATA[상품평순]]></value>
+		<value xml:lang="en"><![CDATA[Most reviews]]></value>
+		<value xml:lang="jp"><![CDATA[レビューが多い順]]></value>
+		<value xml:lang="zh-TW"><![CDATA[最多回應]]></value>
+	</item>
+	<item name="cmd_order_new">
+		<value xml:lang="ko"><![CDATA[신상품순]]></value>
+		<value xml:lang="en"><![CDATA[Recent]]></value>
+	</item>
+	<item name="review_write">
+		<value xml:lang="ko"><![CDATA[상품후기쓰기]]></value>
+		<value xml:lang="en"><![CDATA[Write]]></value>
+	</item>
+	<item name="review_com">
+		<value xml:lang="ko"><![CDATA[등록]]></value>
+		<value xml:lang="en"><![CDATA[Comfirm]]></value>
+	</item>
+	<item name="qna_write">
+		<value xml:lang="ko"><![CDATA[질문등록]]></value>
+		<value xml:lang="en"><![CDATA[Write]]></value>
+	</item>
+	<item name="qna_answer">
+		<value xml:lang="ko"><![CDATA[답글]]></value>
+		<value xml:lang="en"><![CDATA[Answer]]></value>
+	</item>
+	<item name="goto_review">
+		<value xml:lang="ko"><![CDATA[리뷰]]></value>
+		<value xml:lang="en"><![CDATA[REVIEW]]></value>
+	</item>
+	<item name="goto_qna">
+		<value xml:lang="ko"><![CDATA[문의]]></value>
+		<value xml:lang="en"><![CDATA[QA]]></value>
+	</item>
+	<item name="cancel">
+		<value xml:lang="ko"><![CDATA[취소]]></value>
+		<value xml:lang="en"><![CDATA[CANCEL]]></value>
+	</item>
+</lang>

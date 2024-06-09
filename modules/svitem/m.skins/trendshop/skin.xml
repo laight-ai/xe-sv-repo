@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+	<title xml:lang="ko">트렌드샵 모바일 상품 스킨</title>
+	<description xml:lang="ko">트렌드샵 모바일 상품 스킨</description>	
+	<version>1.0.0</version>
+	<date>2015-10-31</date>
+	<link>http://cameron.co.kr/</link>
+
+	<author email_address="mail@cameron.co.kr" link="http://cameron.co.kr/">
+		<name xml:lang="ko">CAMERON</name>
+	</author>
+
+	<extra_vars>
+		<group>
+			<title xml:lang="ko">상품 리스트 페이지</title>
+			<var name="category_title" type="select">
+				<title xml:lang="ko">상단 카테고리 타이틀</title>
+				<description xml:lang="ko">상단에 카테고리 타이틀을 표시합니다.</description>
+				<options value="">
+					<title xml:lang="ko">선택하세요.</title>
+				</options>
+				<options value="Y">
+					<title xml:lang="ko">보이기</title>
+				</options>
+				<options value="N">
+					<title xml:lang="ko">보이지 않기</title>
+				</options>
+			</var>
+			<var name="list_style" type="select">
+				<title xml:lang="ko">상품목록 형태</title>
+				<description />
+				<options value="grid">
+					<title xml:lang="ko">갤러리형</title>
+				</options>
+				<options value="list">
+					<title xml:lang="ko">웹진형</title>
+				</options>
+			</var>
+			<var name="list_count" type="text">
+				<title xml:lang="ko">상품 리스트 개수</title>
+				<description xml:lang="ko">한 페이지에 표시할 상품 개수 * 미입력시 기본 30개 출력</description>
+			</var>
+			<var name="list_columns" type="select">
+				<title xml:lang="ko">갤러리형 상품 리스트 단수</title>
+				<description xml:lang="ko">갤러리형일 때 한 줄에 표시할 상품 개수</description>
+				<options value="3">
+					<title xml:lang="ko">3</title>
+				</options>
+				<options value="1">
+					<title xml:lang="ko">1</title>
+				</options>
+				<options value="2">
+					<title xml:lang="ko">2</title>
+				</options>
+				<options value="4">
+					<title xml:lang="ko">4</title>
+				</options>
+			</var>
+			<var name="list_thumbnail_width" type="text">
+				<title xml:lang="ko">썸네일 가로 사이즈</title>
+				<description xml:lang="ko">px 제외 숫자만 입력하세요. * 미입력시 240(px)</description>
+			</var>
+			<var name="list_thumbnail_height" type="text">
+				<title xml:lang="ko">썸네일 세로 사이즈</title>
+				<description xml:lang="ko">px 제외 숫자만 입력하세요. * 미입력시 240(px)</description>
+			</var>
+			<var name="list_thumbnail_type" type="select">
+				<title xml:lang="ko">썸네일 생성방법</title>
+				<description xml:lang="ko">썸네일 생성방법을 선택할 수 있습니다.</description>
+				<options value="crop">
+					<title xml:lang="ko">꽉 채우기</title>
+				</options>
+				<options value="ratio">
+					<title xml:lang="ko">비율 맞추기</title>
+				</options>
+			</var>
+			<var name="subject_cutsize" type="text">
+				<title xml:lang="ko">상품명 출력 글자수</title>
+				<description xml:lang="ko">상품명이 길어질 경우 출력 글자수를 지정할 수 있습니다.</description>
+			</var>
+			<var name="list_info" type="select">
+				<title xml:lang="ko">갤러리형 상품정보 출력</title>
+				<description xml:lang="ko">썸네일/제목/가격 외 [목록페이지 출력항목설정] 항목 출력여부</description>
+				<options value="N">
+					<title xml:lang="ko">보이지 않기</title>
+				</options>
+				<options value="Y">
+					<title xml:lang="ko">보이기</title>
+				</options>
+			</var>
+		</group>
+
+		<group>
+			<title xml:lang="ko">상품 상세 페이지</title>
+			<title xml:lang="en">More details</title>
+			<var name="thumbnail_width" type="text">
+				<title xml:lang="ko">썸네일 가로 사이즈</title>
+				<description xml:lang="ko">px 제외한 숫자만 입력하세요. * 미입력시 720(px)</description>
+			</var>
+			<var name="thumbnail_height" type="text">
+				<title xml:lang="ko">썸네일 세로 사이즈</title>
+				<description xml:lang="ko">px 제외한 숫자만 입력하세요. * 미입력시 720(px) </description>
+			</var>
+			<var name="thumbnail_type" type="select">
+				<title xml:lang="ko">썸네일 생성방법</title>
+				<description xml:lang="ko">썸네일 생성방법을 선택할 수 있습니다.</description>
+				<options value="crop">
+					<title xml:lang="ko">꽉 채우기</title>
+				</options>
+				<options value="ratio">
+					<title xml:lang="ko">비율 맞추기</title>
+				</options>
+			</var>
+		</group>
+		<group>
+			<title xml:lang="ko">기타</title>
+			<var name="store_top" type="textarea">
+				<title xml:lang="ko">스토어 상단</title>
+				<description xml:lang="ko">스토어 상단 부분에 출력되는 부분입니다.</description>
+			</var>
+			<var name="store_bottom" type="textarea">
+				<title xml:lang="ko">스토어 하단</title>
+				<description xml:lang="ko">스토어 하단 부분에 출력되는 부분입니다.</description>
+			</var>
+		</group>
+	</extra_vars>
+</skin>

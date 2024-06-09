@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* Category Title */
+.category-title{margin-bottom:35px; text-align:center}
+.category-title #category-title{margin:0 0 16px 0; padding:0; font-weight:bold; font-size:1.167em; color:#444}
+.category-title #category-title a{color:#444}
+.category-title .category-title-list ul{display:inline-block; margin:0; padding:0; list-style:none}
+.category-title .category-title-list li.cate-all,
+.category-title .category-title-list li.cate{display:inline-block; zoom:1; *display:inline; margin:0 0 0 14px; padding:0; color:#666}
+.category-title .category-title-list li.cate:first-child{margin-left:0}
+.category-title .category-title-list li.cate:before{display:inline-block; content:"/"; margin-right:14px}
+.category-title .category-title-list li.cate:first-child:before{display:none}
+.category-title .category-title-list li a{color:#666}
+.category-title .category-title-list li a:hover,
+.category-title .category-title-list li a:focus,
+.category-title .category-title-list li a.current{color:#af5592}
+.category-title .category-title-list li a.current{font-weight:bold}
+
+/* List Header */
+.list-header{margin-bottom:12px}
+
+/* List Style */
+#list-style{padding:4px 31px 5px 4px; background:url(../img/list_type.png) no-repeat right center; border:1px solid #ccc; border-radius:0; color:#666; -webkit-appearance:none}
+
+/* Display Style */
+.display_style{text-align:right}
+.display_style a{display:inline-block; width:28px; height:28px; line-height:28px; border:1px solid #ddd; background-color:#f4f4f4; text-align:center; font-size:17px}
+.display_style .ds-grid{border-right:0; color:#bbb}
+.display_style .ds-grid.ds-current{color:#888}
+.display_style .ds-list{border-left:0; color:#bbb}
+.display_style .ds-list.ds-current{color:#888}
+.display_style .ds-current{border:1px solid #ccc; background-color:#fff}
+
+/* Display List - Grid */
+.display-grid > ul{overflow:hidden; margin-top:0; margin-bottom:10px; padding:0; list-style:none}
+.display-grid > ul > li{position:relative; float:left; margin:0 0 16px 0; padding-top:0; padding-bottom:0}
+.display-grid > ul > li.li-last{margin-right:0}
+.display-grid > ul > li a,
+.display-grid > ul > li a:hover{text-decoration:none}
+.display-grid > ul > li .check{position:absolute; left:0; top:0; padding:4px}
+.display-grid .item-thumbnail img{width:100%; height:auto}
+.display-grid .item-thumbnail:hover img,
+.display-grid .item-thumbnail:focus img{}
+.display-grid .item-name{display:block; margin-top:10px; text-align:center; font-family:돋움,sans-serif; color:#444}
+.display-grid .item-desc{display:block; margin-top:3px; text-align:center; font-family:돋움,sans-serif; font-size:0.917em; color:#888}
+.display-grid .item-price{margin-top:3px; text-align:center; color:#333}
+.display-grid .item-price .price{margin-right:5px; font-size:0.917em; color:#888}
+.display-grid .item-price .currency_symbol{margin-right:5px}
+.display-grid .item-choice{margin-top:18px}
+.display-grid .item-choice .ic-btn{display:inline-block; margin-right:3px; padding:1px 4px 0px 4px; border:1px solid #c5c5c5; font-size:0.917em; color:#888}
+.display-grid .item-choice .ic-btn:hover,
+.display-grid .item-choice .ic-btn:focus{border-color:#888}
+.display-grid .item-meta{margin-top:4px; font-family:돋움,sans-serif; font-size:0.917em; color:#666}
+
+.item-badge{margin-top:6px}
+.item-badge ul{margin:0; padding:0; list-style:none; text-align:center}
+.item-badge li{display:inline-block; margin:0 2px; padding:0; border:0}
+.item-badge li img{display:block; width:25px; height:10px}
+@media (max-width:479px) {
+	.display-grid .item-price .price{display:block; margin-right:0}
+}
+@media (min-width:768px) {
+	.display-grid .item-name,
+	.display-grid .item-price{font-size:1.083em}
+	.display-grid .item-desc{},
+	.display-grid .item-price .price{font-size:1em}
+	.item-badge li img{width:30px; height:12px}
+}
+
+/* Display List - List */
+.display-list > ul{margin:0; padding:0; border-top:1px solid #ddd; list-style:none}
+.display-list > ul > li{width:100%; margin:0; padding:15px 0; border-bottom:1px solid #f2f2f2}
+.display-list > ul > li a{display:block}
+.display-list > ul > li a,
+.display-list > ul > li a:hover{text-decoration:none}
+.display-list > ul > li .check{position:absolute; left:0; top:0; padding:4px}
+.display-list .item-thumbnail{position:relative; display:block; background-color:#fff}
+.display-list .item-thumbnail img{width:100%; height:auto}
+.display-list .item-thumbnail:hover img,
+.display-list .item-thumbnail:focus img{}
+
+.display-list .item-name{margin-top:8px; font-family:돋움,sans-serif; font-weight:bold; font-size:1.083em; color:#444}
+.display-list .item-desc{margin-top:9px; font-family:돋움,sans-serif; color:#666}
+.display-list .item-price{margin-top:11px; font-size:1.083em; color:#333}
+.display-list .item-price .price{margin-right:6px; color:#888}
+.display-list .item-price .currency_symbol{margin-right:5px}
+.display-list .item-choice{margin-top:13px}
+.display-list .item-choice .ic-btn{display:inline-block; margin-right:3px; padding:1px 4px 0px 4px; border:1px solid #c5c5c5; font-size:0.917em; color:#888}
+.display-list .item-choice .ic-btn:hover,
+.display-list .item-choice .ic-btn:focus{border-color:#666}
+.display-list .item-meta{margin-top:9px; font-family:돋움,sans-serif; color:#666}
+
+.display-list .item-badge ul{text-align:left}
+.display-list .item-badge li{margin-left:0}
+
+/* Pagination */
+.list-pagination{margin:30px 0; padding:0; text-align:center}
+.list-pagination .direction{display:inline-block; width:22px; height:22px; line-height:22px; background:#f4f4f4; border:1px solid #ddd; text-align:center; color:#888}
+.list-pagination .page-no{display:inline-block; width:22px; height:22px; line-height:22px; background:#fff; border:1px solid #ddd; text-align:center; font-size:0.917em; color:#888}
+.list-pagination .page-current{border-color:#ccc; color:#af5592}

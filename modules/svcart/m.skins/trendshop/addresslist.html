@@ -1,0 +1,43 @@
+<load target="css/addresslist.css" />
+<load target="lang" />
+
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<div id="addressList">
+	<div class="addr-add-title newclearfix"><img src="img/addr_delivery_title.png" title="{$lang->cmd_addr_manage}" style="width:135px; height:27px" /></div>
+
+	<table class="addr-list-table">
+		<thead>
+			<tr>
+				<th>{$lang->select_address}</th>
+				<block loop="$fieldset_list=>$key,$val">
+				<th loop="$val->fields=>$key2,$field">{$field->column_title}</th>
+				</block>
+			</tr>
+		</thead>
+		<tbody>
+			<tr loop="$list=>$key,$val">
+				{@$vars=get_object_vars(unserialize($val->address))}
+				<td class="addr-select-td"><a href="#" class="addr-select" onclick="apply_address({$val->address_srl}); return false;">{$lang->addr_select}</a></td>
+				<block loop="$fieldset_list=>$key2,$val2">
+				<td loop="$val2->fields=>$key3,$field"><span cond="is_array($vars[$field->column_name])">{implode($vars[$field->column_name])}</span><span cond="!is_array($vars[$field->column_name])">{$vars[$field->column_name]}</span></td>
+				</block>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="pageNavigation"></div>
+
+	<div class="addr-btn">
+		<a href="#" class="addr-add-btn" onclick="window.open('{getUrl('act','dispSvcartAddressManagement')}', 'addressbook_popup', 'left=50, top=20, width=800, scrollbars=yes, height=600, toolbars=no');parent.close_modal(); return false;">{$lang->cmd_addr_manage}</a>
+	</div>
+</div>
+
+<script>
+	function apply_address(address_srl) {
+		parent.apply_address_info(address_srl);
+		parent.close_modal();
+	}
+</script>

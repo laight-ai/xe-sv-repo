@@ -1,0 +1,96 @@
+<load target="css/itemlist.css" />
+<load target="../../tpl/skin.js/handler_item.js" />
+<load target="lang" />
+
+<block cond="!$module_info->list_style">{@ $module_info->list_style = 'grid'}</block>
+<block cond="!$listStyle">{@ $listStyle = $module_info->list_style}</block>
+<block cond="!$module_info->list_thumbnail_width">{@ $module_info->list_thumbnail_width = 240}</block>
+<block cond="!$module_info->list_thumbnail_height">{@ $module_info->list_thumbnail_height = 240}</block>
+<block cond="!$module_info->list_thumbnail_type">{@ $module_info->list_thumbnail_type = 'crop'}</block>
+
+<script>
+var g_sSvcartMid = '{$module_info->svcart_mid}';
+</script>
+
+<include target="_header.html" />
+
+<div id="itemlist">
+	<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+
+	<include cond="$module_info->category_display != 'N' && $module_info->category_title == 'Y'" target="categorylist_title.html" />
+	
+	<div id="item-list">
+		<form class="list-header row">
+			<input type="hidden" name="vid" value="{$vid}" />
+			<input type="hidden" name="mid" value="{$mid}" />
+			<input type="hidden" name="act" value="{$act}" />
+			<input type="hidden" name="category" value="{$category}" />
+			<input type="hidden" name="error_return_url" value="" />
+			<input type="hidden" name="listStyle" value="{$listStyle}" />
+			
+			<div class="col-xs-6">
+				<select id="list-style" onchange="if(this.value) window.location.href=this.value;">
+					<option value="{getUrl('sort_index','','order_type','')}" selected="selected"|cond="!$sort_index && !$order_type">{$lang->cmd_order_new}</option>
+					<option value="{getUrl('sort_index','price','order_type','asc')}" selected="selected"|cond="$sort_index=='price' && $order_type=='asc'">{$lang->cmd_order_lowprice}</option>
+					<option value="{getUrl('sort_index','price','order_type','desc')}" selected="selected"|cond="$sort_index=='price' && $order_type=='desc'">{$lang->cmd_order_highprice}</option>
+					<option value="{getUrl('sort_index','review_count','order_type','desc')}" selected="selected"|cond="$sort_index=='review_count' && $order_type=='desc'">{$lang->cmd_order_review}</option>
+				</select>
+			</div>
+			<div class="col-xs-6 display_style">
+				<a class="ds-grid<!--@if($listStyle=='grid')--> ds-current<!--@endif-->" href="{getUrl('listStyle','grid')}"><i class="xi-contents-grid"></i></a><a class="ds-list<!--@if($listStyle=='list')--> ds-current<!--@endif-->" href="{getUrl('listStyle','list')}"><i class="xi-list-ul-square"></i></a>
+			</div>
+		</form>
+
+		<include cond="$listStyle=='list'" target="list_list.html" />
+		<include cond="$listStyle=='grid'" target="list_grid.html" />
+	
+		<form class="list-pagination" method="post" action="">
+			<input type="hidden" name="error_return_url" value="" />
+			<input type="hidden" name="module" value="{$module}" />
+			<input type="hidden" name="act" value="{$act}" />
+			<input cond="$order_target" type="hidden" name="order_target" value="{$order_target}" />
+			<input cond="$order_type" type="hidden" name="order_type" value="{$order_type}" />
+			<input cond="$category_srl" type="hidden" name="category_srl" value="{$category}" />
+			<input cond="$childrenList" type="hidden" name="childrenList" value="{$childrenList}" />
+			<input cond="$search_keyword" type="hidden" name="search_keyword" value="{$search_keyword}" />
+	
+			<a href="{getUrl('page', '')}" class="direction">&lt;</a>
+	
+			<block cond="$page_navigation->first_page + $page_navigation->page_count > $page_navigation->last_page && $page_navigation->page_count != $page_navigation->total_page">
+				{@$isGoTo = true}
+				<a href="{getUrl('page', '')}">1</a>
+				<a href="#goTo" class="tgAnchor" title="{$lang->cmd_go_to_page}">...</a>
+			</block>
+	
+			<!--@while($page_no = $page_navigation->getNextPage())-->
+				{@$last_page = $page_no}
+				<span cond="$page_no == $page" class="page-no page-current">{$page_no}</span>
+				<a cond="$page_no != $page" href="{getUrl('page', $page_no)}" class="page-no">{$page_no}</a>
+			<!--@end-->
+	
+			<block cond="$last_page != $page_navigation->last_page">
+				{@$isGoTo = true}
+				<a href="#goTo" class="tgAnchor" title="{$lang->cmd_go_to_page}">...</a>
+				<a href="{getUrl('page', $page_navigation->last_page)}">{$page_navigation->last_page}</a>
+			</block>
+	
+			<a href="{getUrl('page', $page_navigation->last_page)}" class="direction">&gt;</a>
+	
+			<span cond="$isGoTo" id="goTo" class="tgContent">
+				<input name="page" title="{$lang->cmd_go_to_page}" />
+				<button type="submit">Go</button>
+			</span>
+		</form>
+	</div>
+</div>
+<block cond="$ext_script">
+{$ext_script}
+</block>
+<include target="_footer.html" />
+<block loop="$aList=>$nIdx,$oItem">
+{@
+	$oItem->patchImpression();
+}
+</block>

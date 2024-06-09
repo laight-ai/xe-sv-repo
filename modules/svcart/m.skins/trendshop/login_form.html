@@ -1,0 +1,65 @@
+<load target="css/trendshop_sign.css" />
+
+<div id="signin-form">
+	<div class="member-title">{$lang->cmd_login}</div>
+
+	<ul class="nav nav-tabs" cond="$is_logged && $logged_info->menu_list && (!$member_srl || $member_srl == $logged_info->member_srl)">
+		<li loop="$logged_info->menu_list=>$key,$val" class="active"|cond="$key==$act">
+			<a href="{getUrl('', 'act',$key, 'mid', $mid, 'vid', $vid)}">{Context::getLang($val)}</a>
+		</li>
+	</ul>
+
+	<div cond="$mid=='orders'" class="signin-select clearfix">
+		<ul>
+			<li class="col-xs-6"><a href="{getUrl('mid',$mid,'act','')}">{$lang->guest}</a></li>
+			<li class="col-xs-6 active"><a href="{getUrl('mid',$mid,'act','dispMemberLoginForm')}">{$lang->member}</a></li>
+		</ul>
+	</div>
+
+	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/m.skin/trendshop/login_form/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+		<p>{$XE_VALIDATOR_MESSAGE}</p>
+	</div>
+
+	<form ruleset="@login" action="{getUrl('')}" method="post" id="fo_member_login">
+		<input type="hidden" name="success_return_url" value="{$referer_url}" />
+		<input type="hidden" name="act" value="procMemberLogin" />
+		<input type="hidden" name="xe_validator_id" value="modules/member/skins" />
+		<div class="signin-idpw">
+			<!--@if($identifier != 'user_id')-->
+			<input type="email" name="user_id" id="uid" required placeholder="{$lang->email_address}" title="{$lang->email_address}" />
+			<!--@else-->
+			<input type="text" name="user_id" id="uid" required placeholder="{$lang->user_id}" title="{$lang->user_id}" />
+			<!--@endif-->
+			<input type="password" name="password" id="upw" required placeholder="{$lang->password}" title="{$lang->password}" />
+		</div>
+
+		<div class="signin-auto">
+			<input type="checkbox" name="keep_signed" id="keepid_opt" value="Y" /><label for="keepid_opt">{$lang->keep_signed}</label>
+			<div id="warning">
+				<p>{$lang->about_keep_warning}</p>
+			</div>
+		</div>
+
+		<div class="signin-submit"><input type="submit" value="{$lang->cmd_login}" id="siginin-btn" /></div>
+
+		<div class="signin-ex">
+			<div class="signin-find">
+				<a href="{getUrl('act','dispMemberFindAccount')}">{$lang->cmd_find_member_account}</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="{getUrl('act','dispMemberSignUpForm')}">{$lang->cmd_signup}</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="{getUrl('act','dispSvcartOrderItems','cartnos',Context::get('cartnos'))}" cond="$config->guest_buy != 'N'">{$lang->cmd_non_buy}</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+jQuery(function($){
+	var keep_msg = $('#warning');
+	keep_msg.hide();
+	$('#keepid_opt').change(function(){
+		if($(this).is(':checked')){
+			keep_msg.slideDown(200);
+		} else {
+			keep_msg.slideUp(200);
+		}
+	});
+});
+</script>

@@ -1,0 +1,103 @@
+<load target="css/cartitems.css" />
+<load target="../../tpl/skin.js/script.js" />
+<load target="../../tpl/skin.js/cartitems.js" />
+<load target="lang" />
+
+<block cond="!$module_info->thumbnail_width">{@ $module_info->thumbnail_width = 240}</block>
+<block cond="!$module_info->thumbnail_height">{@ $module_info->thumbnail_height = 240}</block>
+<block cond="!$module_info->thumbnail_type">{@ $module_info->thumbnail_type = 'crop'}</block>
+
+<!--- Google Analytics Code Begin (20151121) singleview.co.kr --->
+<script type="text/javascript">
+gaectkCart.init();
+var g_sSvcartMid = '{$mid}';
+</script>
+<!--- Google Analytics Code End (20151121) singleview.co.kr ---->
+
+<!----------------------->
+{$npay_script_handler_global}
+<!----------------------->
+
+<div id="cart-items">
+	<div class="ncart-title">{$lang->svcart}</div>
+	<!--@if(count($list))-->
+		<div id="cart-list">
+			<table class="item-table">
+				<thead>
+					<tr>
+						<th class="thumbnail">{$lang->svcart}</th>
+						<th class="info"></th>
+						<th class="checkbox"><input type="checkbox" value="{$val->cart_srl}" onclick="XE.checkboxToggleAll('cart',{doClick:true}); return false;" checked="checked" /></th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3"><a href="#" id="deleteCart" class="item-button button-delete-all" onclick="return false;">{$lang->selected_delete}</a></td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<block loop="$list=>$no,$val">
+<!--- Google Analytics Code Begin (20151121) singleview.co.kr --->
+<script type="text/javascript">
+gaectkCart.queueItemInfo( '{$val->cart_srl}', '{$val->item_srl}', '{$val->item_name}', '{$val->enhanced_item_info->ga_category_name}', '{$val->enhanced_item_info->ga_brand_name}', '{$val->enhanced_item_info->ga_variation_name}', '{$val->item_price}', '{$val->quantity}', '' );
+</script>
+<!--- Google Analytics Code End (20151121) singleview.co.kr ---->
+
+						<tr class="list-item">
+							<td class="thumbnail">
+								<a href="{getUrl('','document_srl',$val->document_srl)}"><img src="{svitemView::_dispThumbnailUrl($val->thumb_file_srl, $module_info->thumbnail_width, $module_info->thumbnail_height, $module_info->thumbnail_type)}" /></a>
+							</td>
+							<td class="info">
+								<div class="item-title"><a href="{getUrl('','document_srl',$val->document_srl)}">{$val->item_name}</a></div>
+								<div cond="$val->option_srl" class="item-option-title">{$lang->order_options} : {$val->option_title}</div>
+								<div class="item-price number-font"><span class="price1">{number_format($val->item_price)}</span><span class="price2"> {number_format($val->discounted_price+$val->option_price)}</span></div>
+								<div id="item_{$val->item_srl}" class="item-quantity">
+									<div class="iconDown" data-for="{$val->cart_srl}"><i class="xi-minus"></i></div><input type="number" id="{$val->cart_srl}" class="quantity number-font" pattern="[0-9]*" inputmode="numberic" min="1" value="{$val->quantity}" /><div class="iconUp" data-for="{$val->cart_srl}"><i class="xi-plus"></i></div><a class="item-button button-update updateQuantity" data-for="{$val->cart_srl}">{$lang->cmd_change}</a>
+								</div>
+							</td>
+							<td class="checkbox"><input type="checkbox" name="cart" value="{$val->cart_srl}" checked="checked" /></td>
+						</tr>
+						<tr class="each-item">
+							<td colspan="3">
+								<div class="each-price">{$lang->sum} : <strong class="number-font">{number_format($val->sum_discounted_price)}</strong></div>
+								<div class="each-payment"><a class="item-button button-payment" href="#" onclick="progressOrderIndividual('{$svorder_mid}', {$val->cart_srl},'{$login_chk}');">{$lang->order}</a><a class="item-button button-delete-itemc" href="#" onclick="deleteCartItem({$val->cart_srl}); return false;">{$lang->cmd_delete}</a></div>
+							</td>
+						</tr>
+					</block>
+				</tbody>
+			</table>
+		</div>
+	
+		<div id="total-price">
+			<table class="price-table">
+				<tbody>
+					<tr>
+						<td class="count-total-price">
+							<div>{$lang->total_amount} : <span class="number-font">{number_format($sum_price)}</span></div>
+							<div>{$lang->total_discount} :  <span class="number-font"><!--@if($total_discount_amount)-->{number_format($total_discount_amount)}<!--@else-->0<!--@endif--></span></div>
+							<div cond="$module_info->display_delivfee=='Y' || $delivery_fee">{$lang->delivery_fee} : <span id="delivery_fee" class="price-section number-font"><!--@if($delivery_fee)-->{number_format($delivery_fee)}<!--@else-->{$lang->free_delivery}<!--@endif--></span></div>
+						</td>
+						<td id="payment_amount">
+							<div>{$lang->payment_amount}</div>
+							<div class="price-total number-font">{number_format($total_price)}</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+		<div class="go-button row">
+			<div class="col-xs-6"><a href="javascript:history.go(-1)" class="go-back">{$lang->cmd_continue_shopping}</a></div>
+			<div class="col-xs-6"><a href="#" class="go-front" onclick="progressOrderItems('{$login_chk}','{$svorder_mid}'); return false;">{$lang->cmd_order}</a></div>
+			{$npay_script_handler_button}
+		</div>
+	
+<script>
+var g_total_items = {count($list)};
+xe.lang.msg_select_items_in_order_to_delete = '{$lang->msg_select_items_in_order_to_delete}';
+</script>
+	
+	<!--@else-->
+		<div class="no-list-item">{$lang->msg_no_items}</div>
+	<!--@endif-->
+</div>

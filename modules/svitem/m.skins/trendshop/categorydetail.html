@@ -1,0 +1,12 @@
+<div id="item-list-title" class="item-list-title newclearfix">
+	<h2>
+		<block loop="$parent_catalog_list=>$key,$val">
+			<!--@if($val->node_srl == 0)-->
+				<a href="/{$mid}/#item-list-title">{$mid}</a> > 
+			<!--@else-->
+				<a href="/{$mid}/Catalog/{$val->node_srl}#item-list-title">{$val->node_name}</a> > 
+			<!--@endif-->
+		</block>
+		<a href="/{$mid}/Catalog/{$current_catalog_info->node_srl}#item-list-title">{$current_catalog_info->node_name}</a>
+	</h2>
+</div>

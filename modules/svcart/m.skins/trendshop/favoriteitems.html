@@ -1,0 +1,78 @@
+<load target="css/cartitems.css" />
+<load target="../../tpl/skin.js/script.js" />
+<load target="lang" />
+
+<block cond="!$module_info->thumbnail_width">{@ $module_info->thumbnail_width = 240}</block>
+<block cond="!$module_info->thumbnail_height">{@ $module_info->thumbnail_height = 240}</block>
+<block cond="!$module_info->thumbnail_type">{@ $module_info->thumbnail_type = 'crop'}</block>
+
+<div id="cart-items">
+	<div class="ncart-title">{$lang->wish_list}</div>
+	<!--@if(count($favorite_items))-->
+		<div id="cart-list">
+			<table class="item-table">
+				<thead>
+					<tr>
+						<th class="thumbnail">{$lang->wish_list}</th>
+						<th class="info"></th>
+						<th class="checkbox"><input type="checkbox" value="{$val->item_srl}" onclick="XE.checkboxToggleAll('favorite_cart',{doClick:true}); return false;" checked="checked" /></th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3"><a href="#" id="deleteFavoriteItems" class="item-button button-delete-all" onclick="return false;">{$lang->selected_delete}</a></td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr loop="$favorite_items=>$no,$val" class="list-item">
+						<td class="thumbnail">
+							<a href="{getUrl('','document_srl',$val->document_srl)}"><img src="{svitemView::_dispThumbnailUrl($val->thumb_file_srl, $module_info->thumbnail_width, $module_info->thumbnail_height, $module_info->thumbnail_type)}" /></a>
+						</td>
+						<td class="info">
+							<div class="item-title"><a href="{getUrl('','document_srl',$val->document_srl)}">{$val->item_name}</a></div>
+							
+							<div cond="!$val->unconditional['discount_info']" class="item-price number-font"><span class="price2"> {number_format($val->price)}</span></div>
+
+							<div cond="$val->unconditional['discount_info']" class="item-price number-font"><span class="price1">{number_format($val->price)}</span><span class="price2"> {number_format($val->discounted_price)}</span></div>
+
+							<div cond="$val->giveaway['item_name'] || $val->unconditional['discount_info'] || $val->conditional">
+								<div cond="$val->giveaway['item_name']">
+									<a href="{$val->giveaway['item_url']}">{number_format($val->giveaway['item_price'])}원 상당의 {$val->giveaway['item_name']} 증정</a>
+								</div>
+								<div cond="$val->unconditional['discount_info']">
+									{$val->unconditional['discount_info']}
+								</div>
+								<div cond="$val->conditional">
+									{@ var_dump( $val->conditional ); }
+								</div>
+							</div>
+							<a class="item-button button-delete-itemf" href="#" data-id="{$val->item_srl}" onclick="return false;">{$lang->cmd_delete}</a>
+						</td>
+						<td class="checkbox"><input type="checkbox" name="favorite_cart" value="{$val->item_srl}" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="go-button">
+			<a href="javascript:history.go(-1)" class="go-front">{$lang->cmd_continue_shopping}</a></div>
+		</div>
+
+<script>
+var g_total_items = {count($list)};
+xe.lang.msg_select_items_in_order_to_delete = '{$lang->msg_select_items_in_order_to_delete}';
+
+jQuery(function($){
+	$('.button-delete').on('click',function() {
+		var params = new Array();
+		params['item_srls'] = $(this).attr('data-id');
+		var responses = ['error','message'];
+		exec_xml('svcart', 'procSvcartDeleteFavoriteItems', params, completeDeleteFavoriteItems, responses);
+	});
+});
+</script>
+
+	<!--@else-->
+		<div class="no-list-item">{$lang->msg_no_items}</div>
+	<!--@endif-->
+</div>

@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* About Order Complete */
+.about-complete{margin:0 -8px 30px; padding:19px 0 21px; border-top:1px solid #ddd; border-bottom:1px solid #ddd; text-align:center; font-size:21px; letter-spacing:-1px; font-weight:normal; color:#333}
+.about-complete em{font-style:normal; color:#af5592}
+
+
+/* Item Table : ncart:cartitems, ncart:orderitems, ncart:ordercomplete, nstore:orderlist, nstore:orderdetail  */
+.item-table{width:100%; margin:0 0 16px 0; padding:0; border:1px solid #ddd; border-spacing:0}
+.item-table th,
+.item-table td{padding:13px 8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.item-table td{vertical-align:top; font-family:돋움,sans-serif}
+.item-table thead th,
+.item-table thead td{background:#fafafa; color:#333}
+.item-table thead th{font-weight:bold}
+.item-table thead td{text-align:right}
+.item-table .list-item td{padding-top:10px; padding-bottom:10px; border-top:1px solid #ddd}
+
+.item-table .thumbnail{width:33.3%}
+@media (min-width:480px){
+	.item-table .thumbnail{width:25%}
+}
+.item-table .thumbnail img{width:100%; max-width:100%; height:auto}
+
+.item-table .info{position:relative}
+.item-table .info .item-title{margin-top:4px; font-weight:bold}
+.item-table .info .item-title a{color:#444}
+.item-table .info .item-option-title,
+.item-table .info .item-price,
+.item-table .info .item-quantity{margin-top:7px; font-size:0.923em}
+.item-table .info .item-sum-price{margin-top:12px; color:#333}
+.item-table strong{color:#af5592}
+.item-table a{color:#666}
+
+
+/* Info Table : ncart:orderitems, ncart:ordercomplete, nstore:orderdetail */
+.info-table{width:100%; margin:0 0 16px; padding:0; border:1px solid #ddd; border-spacing:0}
+.info-table th,
+.info-table td{padding:13px 8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.info-table td{font-family:돋움,sans-serif}
+.info-table thead th,
+.info-table thead td{background:#fafafa; border-bottom:1px solid #ddd; color:#333}
+.info-table thead th{font-weight:bold}
+.info-table thead td{text-align:right}
+.info-table tfoot th,
+.info-table tfoot td{border-top:1px solid #ddd; font-weight:bold}
+.info-table tfoot td{color:#af5592}
+.info-table tbody th,
+.info-table tbody td{border-bottom:1px solid #f2f2f2}
+.info-table tbody tr:last-child th,
+.info-table tbody tr:last-child td{border-bottom:0}
+.info-table tbody .status td{position:relative}
+.info-table tbody .status td .button-group{display:inline-block; position:absolute; top:5px; right:8px; height:30px; line-height:30px}
+.info-table tbody .status td .button-group span{float:right}
+.info-table tbody .division th,
+.info-table tbody .division td{border-top:1px double #ddd}
+.info-table tfoot th,
+.info-table tbody th{width:33.3%; border-right:1px solid #f2f2f2}
+@media (min-width:480px){
+	.info-table tfoot th,
+	.info-table tbody th{width:25%}
+}
+.info-table strong{color:#af5592}
+.info-table a{color:#666}
+
+
+/* Bank Account Info */
+#bank-account-info{width:100%; margin-bottom:16px}
+#bank-account-info .account-info-arrow{margin-bottom:30px; text-align:center}
+#bank-account-info .info-table strong{color:#444}

@@ -1,0 +1,226 @@
+<load target="css/itemdetail.css" />
+<load target="css/thumbs.css" />
+<load cond="!$global['owl']" target="js/owl.carousel.js" type="body" />
+{@ $__Context->global['owl'] = 1}
+<load target="../../tpl/skin.js/scroll.js" />
+<load target="../../tpl/skin.js/handler_item.js" />
+<load target="lang" />
+
+<block cond="!$module_info->thumbnail_width">{@ $module_info->thumbnail_width = 720}</block>
+<block cond="!$module_info->thumbnail_height">{@ $module_info->thumbnail_height = 720}</block>
+<block cond="!$module_info->thumbnail_type">{@ $module_info->thumbnail_type = 'crop'}</block>
+<block cond="!$module_info->review">{@ $module_info->review = 'on'}</block>
+<block cond="!$module_info->qna">{@ $module_info->qna = 'on'}</block>
+
+{@ $category = $oItemInfo->category_id}
+
+<!----------------------->
+{$npay_script_handler_global}
+<!----------------------->
+
+<include target="_header.html" />
+
+<include cond="$module_info->category_display != 'N'" target="categorydetail.html" />
+<!-------- fb view conversion value tagged begin - singleview.co.kr 20180401 -------->
+<script type="text/javascript">
+	fbq('track', 'ViewContent', {
+		value: {$oItemInfo->discounted_price},
+		currency: 'KRW',
+	});
+</script>
+<!-------- fb view conversion value tagged end - singleview.co.kr 20180401 -------->
+
+<script>
+	var g_discounted_price = {$oItemInfo->discounted_price};
+	var g_sSvcartMid = '{$module_info->svcart_mid}';
+	var g_nItemSrl = '{$oItemInfo->item_srl}';
+	// var for npay begin //
+	var g_sSvitemMid = '{$module_info->mid}';
+	var g_nDocumentSrl = '{$oItemInfo->document_srl}';
+	// var for npay end //
+	xe.lang.total_amount = '{$lang->total_amount}';
+	xe.lang.total_amount = '{$lang->total_amount}';
+	xe.lang.msg_input_more_than_one = '{$lang->msg_input_more_than_one}';
+	xe.lang.each = '{$lang->each}';
+	xe.lang.msg_no_bundling_item_selected = '{$lang->msg_no_bundling_item_selected}';
+	xe.lang.msg_bundling_item_quantity_not_match = '{$lang->msg_bundling_item_quantity_not_match}';
+</script>
+
+
+<script>
+function _sendOpenReviewTabClickEvent()
+{
+	var sTmpTitle = 'mob_indetail_page_open_review_tab';
+	sendClickEventGaectk( 'button', sTmpTitle, '#');
+}
+</script>
+<div id="itemdetail">
+	<div id="content_00" class="content-container">
+		<div class="row">
+			<div class="item-thumbnail col-xs-12 col-sm-6">
+				<include target="itemdetail_thumb.html" />
+			</div>
+			<div class="item-spec col-xs-12 col-sm-6">
+				<include target="itemdetail_spec.html" />
+			</div>
+		</div>
+		<div id="sns-share" class="sns-share" data-url="{$oSnsInfo->sPermanentUrl}" data-title="{$oSnsInfo->sEncodedDocTitle}"><a class="sns-facebook" href="#" data-type="facebook" title="To Facebook"><i class="xi-facebook"></i></a><a class="sns-twitter" href="#" data-type="twitter" title="To Twitter"><i class="xi-twitter"></i></a><a class="sns-google" href="#" data-type="google" title="To Google"><i class="xi-google-plus"></i></a><a class="sns-pinterest" href="#" data-type="pinterest" title="To Pinterest"><i class="xi-pinterest"></i></a></div>
+	</div>
+
+	<div class="content-tab row">
+		<ul class="col-xs-12 content-tab-list" role="tablist">
+			<li role="presentation" class="col-xs-4 active"><a href="#content_01" aria-controls="content_01" role="tab" data-toggle="tab">{$lang->description}</a></li>
+			<li role="presentation" class="col-xs-4"><a href="#content_02" aria-controls="content_02" role="tab" data-toggle="tab" onclick="_sendOpenReviewTabClickEvent();">{$lang->reviews}</a></li>
+			<li role="presentation" class="col-xs-4"><a href="#content_03" aria-controls="content_03" role="tab" data-toggle="tab">Q&amp;A</a></li>
+		</ul>
+	</div>
+
+	<div class="tab-content">
+		<div role="tabpanel" id="content_01" class="tab-pane active item-info content-container">
+			{$sItemDescription}
+		</div>
+		<div role="tabpanel" id="content_04" class="tab-pane delivery-info content-container">
+			<div cond="$module_info->display_caution == 'Y'"> 
+				{$module_info->delivery_info}
+			</div>
+			<div cond="$module_info->display_caution == 'N'"> 
+				{$oItemInfo->delivery_info}
+			</div>
+			<div>
+			</div>
+		</div>
+		<div cond="$config->connected_review_board_srl > 0" role="tabpanel" id="content_02" class="tab-pane item-review content-container">
+			<include target="itemdetail_review.html" />
+		</div>
+	
+	
+		<div cond="$config->connected_qna_board_srl > 0" role="tabpanel" id="content_03" class="tab-pane item-inquiry content-container">
+			<include target="itemdetail_qna.html" />
+		</div>
+	</div>
+</div>
+
+<include target="_footer.html" />
+
+<script>
+jQuery(function($){
+	$('#item-thumb').owlCarousel({
+		itemsScaleUp : true,
+		slideSpeed : 300,
+		pagination : true,
+		paginationSpeed : 300,
+		singleItem : true,
+		rewindNav : false,
+		navigation : false,
+		navigationText : false
+	});
+
+	$(function() {
+		$('#select_bundles').change(function(){
+			var $iquantities = jQuery("#selected_bundles").find('tr').not("[data-fixed='yes']").find("td :text" );//$('input[name=bundle_qty]');
+			$iquantities.each(function() {
+				var $this = $(this);
+				if($this.attr('type')=='text'){
+					$this.parent('td').css('width','52px');
+					$this.attr('pattern','[0-9]*').attr('inputmode','numberic').attr('min','1');
+				}
+			});
+		});
+	});
+
+	$(function() {
+		$('#select_options').change(function(){
+			var $iquantities = $('input[name=quantities]');
+			$iquantities.each(function() {
+				var $this = $(this);
+				if($this.attr('type')=='text'){
+					$this.parent('td').css('width','52px');
+					$this.attr('type','number').attr('pattern','[0-9]*').attr('inputmode','numberic').attr('min','1');
+				}
+			});
+		});
+	});
+
+	$(function() {
+		var $sns_share = $('#sns-share'),
+			share_url = $sns_share.attr('data-url'),
+			share_title = $sns_share.attr('data-title'),
+			$sns_link = $sns_share.find('a');
+			
+		$sns_link.on('click',function(e) {
+			var $this = $(this),
+				this_type = $this.attr('data-type');
+			
+			if(!this_type){
+				return;
+			} else if(this_type=="facebook"){
+				var loc = '//www.facebook.com/sharer/sharer.php?u='+share_url+'&t='+share_title;
+			} else if(this_type=="twitter"){
+				loc = '//twitter.com/home?status='+share_title+' '+share_url;
+			} else if(this_type=="google"){
+				loc = '//plus.google.com/share?url='+share_url;
+			} else if(this_type=="pinterest"){
+				loc = '//pinterest.com/pin/create/bookmarklet/?url='+share_url+'&description='+share_title;
+			};
+	
+			window.open(loc);
+	
+			e.preventDefault();
+		});
+	});
+
+<!--@if($module_info->review!="off" || $module_info->qna!="off")-->
+	$(function() {
+		var $comments_title = $('.comments-title');
+		$comments_title.on('click',function(e){
+			e.preventDefault();
+			$(this).toggleClass('close');
+		});
+	});
+<!--@endif-->
+<!--@if($module_info->review!="off")-->
+	$(function() {
+		var $review_write = $('#review-write,#review-cancel');
+		$review_write.on('click',function(e){
+			e.preventDefault();
+			$('#review-form').slideToggle('fast');
+		});
+	});
+<!--@endif-->
+	$(function() {
+		var $review_page = $('#review-page-num a');
+		$review_page.each(function(i){
+			i++;
+			$(this).on('click',function(e){
+				e.preventDefault();
+				$review_page.removeClass('on');
+				$(this).addClass('on');
+				$('#review-list').find('.list-page').addClass('list-hidden');
+				$('#review-list').find('.list-page' + i).removeClass('list-hidden')
+			});
+		});
+	});
+
+	$(function() {
+		var $review_page = $('#qna-page-num a');
+		$review_page.each(function(i){
+			i++;
+			$(this).on('click',function(e){
+				e.preventDefault();
+				$review_page.removeClass('on');
+				$(this).addClass('on');
+console.log($('#qna-list').find('.list-page' + i));
+				$('#qna-list').find('.list-page').addClass('list-hidden');
+				$('#qna-list').find('.list-page' + i).removeClass('list-hidden')
+			});
+		});
+	});
+
+});
+</script>
+{@
+$oItemInfo->patchImpression();
+}
+<block cond="$ext_script">
+{$ext_script}
+</block>

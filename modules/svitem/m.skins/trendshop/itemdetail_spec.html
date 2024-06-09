@@ -1,0 +1,245 @@
+<SCRIPT TYPE='text/javascript'>
+// Enhanced E-Commerce Tagging Begin (20151121) singleview.co.kr
+gaectkDetail.init();
+gaectkDetail.loadItemInfo( '{$oItemInfo->item_srl}', '{$oItemInfo->item_name}', '{$oItemInfo->enhanced_item_info->ga_category_name}', '{$oItemInfo->enhanced_item_info->ga_brand_name}', '{$oItemInfo->enhanced_item_info->ga_variation_name}', '{$oItemInfo->discounted_price}' );
+gaectkDetail.patchDetail();
+// Enhanced E-Commerce Tagging End (20151121) singleview.co.kr
+</SCRIPT>
+<script>  
+window.fbAsyncInit = function () 
+{
+	FB.init({
+		appId: '{$fb_app_id}', 
+		status: false,
+		cookie: false,
+		xfbml: true
+	});
+
+	//Additional
+	FB.Event.subscribe('edge.create',
+		function (response) {
+<block cond="$additional_conditional_discount_amount > 0">
+			applyFbLikePromotion({$oItemInfo->item_srl});
+</block>
+			sendClickEventGaectk( 'button', 'pc_facebook_liked_item_srl_{$oItemInfo->item_srl}', '#' );
+		}
+	);
+	FB.Event.subscribe('edge.remove', 
+		function (response) {
+<block cond="$additional_conditional_discount_amount > 0">
+			//g_bFB_liked = 0;
+			//calculate_sum();
+</block>
+			sendClickEventGaectk( 'button', 'pc_facebook_unliked_item_srl_{$oItemInfo->item_srl}', '#' );
+		}
+	);
+};
+
+// Asynchronously
+(function (d) {
+var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+if (d.getElementById(id)) { return; }
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/en_US/all.js";
+ref.parentNode.insertBefore(js, ref);
+} (document));
+
+(function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- FACEBOOK JS SDK -->
+<div id="fb-root"></div>
+<center><div class="share" style='display:visible'><div class="fb-like" data-share="true" data-width="310" data-show-faces="true"></div></div></center>
+<table class="item-spec-table">
+	<caption>{$oItemInfo->item_name}</caption>
+	<tr class="item-name">
+		<th>{$lang->item_name}</th>
+		<td>{$oItemInfo->item_name}</td>
+	</tr>
+	<tr cond="$oItemInfo->enhanced_item_info->item_brief">
+		<th>상품설명</th>
+		<td>{$oItemInfo->enhanced_item_info->item_brief}</td>
+	</tr>
+	<tr cond="$mid_config->display_itemcode_detail!='N'">
+		<th>{$lang->item_code}</th>
+		<td class="number-font">{$oItemInfo->item_code}</td>
+	</tr>
+	<!---tr>
+		<th>{$lang->sales_price}</th>
+		<td>
+			<span id='normal_price_tag'><span class='currency_symbol'>₩</span><span id='sales_price'>{$oItemInfo->price}</span></span>
+			<span id='discounted_price_tag' style="display:none">
+				<span class='currency_symbol'>₩</span><span id='discounted_price'>{$discounted_price}</span>&nbsp;(<span id='discount_info'>{$discount_info}</span>)
+			</span>
+		</td>
+	</tr--->
+	<tr cond="$additional_conditional_discount_info_fblike">
+		<th><!---a href='#' onclick='applyFbLikePromotion({$oItemInfo->item_srl});'><img src='/modules/svitem/tpl/img/btn_fblike_50x21.jpg'></a--->프로모션</th>
+		<td>
+<block loop="$additional_conditional_discount_info_coupon=>$coupon_key,$coupon_val">
+			<span>{$coupon_val->conditional_additional_discount_info}<BR></span>
+</block>
+			<span cond="$additional_conditional_discount_info_fblike->conditional_additional_discount_info">{$additional_conditional_discount_info_fblike->conditional_additional_discount_info}<BR></span>
+			<span cond="$additional_conditional_discount_info_fbshare->conditional_additional_discount_info"><a href="#" onclick="shareonfacebook()"><img src="../../tpl/img/btn_fbshare_50x18.png" /></a>{$additional_conditional_discount_info_fbshare->conditional_additional_discount_info}</span>
+			<span cond="$additional_conditional_discount_info_coupon && $additional_conditional_discount_info_fblike"><font color='red'>중복적용 불가</font></span>
+		</td>
+	</tr>
+	<tr cond="$giveaway_item_name">
+		<th><font color='red'>증정</font></th>
+		<td>
+			<span><a href='{$giveaway_item_url}' target='_new'><span style='text-decoration: underline; text-decoration-color: black;'>{$giveaway_item_name}</span></a> (<span class='currency_symbol'>₩</span>{number_format($giveaway_item_price)} 상당)</span>
+		</td>
+	</tr>
+	<tr cond="!count($oItemInfo->aBuyingOption)">
+		<th>{$lang->order_quantity}</th>
+		<td>
+			<div id="item_{$oItemInfo->item_srl}" class="quantity-input">
+				<input type="text" id="quantity_{$oItemInfo->item_srl}" class="quantity" value="1" />
+				<div class="iconUp" id="quantity_up" name="quantity_up" data-for="quantity_{$oItemInfo->item_srl}"></div>
+				<div class="iconDown" id="quantity_down" name="quantity_down" data-for="quantity_{$oItemInfo->item_srl}"></div>
+			</div>
+		</td>
+	</tr>
+	<tr cond="$bundle && $bundle != 'null'">
+		<th>{$lang->order_bundlings}</th>
+		<td>
+			<select id="select_bundles">
+				<option value="">{$lang->cmd_select}</option>
+				<option loop="$floating_bundles=>$key,$val" data-itemsrl="{$val->nItemSrl}" data-typeid="{$val->nTypeid}" data-title="{$val->sItemName}">{$val->sItemName}</option>
+			</select>
+			<div>
+				<table id="selected_bundles">
+					<tbody>
+						<tr loop="$bundle_fixed_element=>$key,$val" id="bundle_{$val->nItemSrl}" data-typeid='{$val->nTypeid}' data-fixed='yes'>
+							<td>{$val->sItemName}</td>
+							<td style="width: 52px;">
+								<input type="hidden" name="bundle_item_srls" value="{$val->nItemSrl}" /><input type="text" data-unit-qty='{$val->nMaxQty}'name="bundle_qty" id="bundle_qty" class="quantity" value="{$val->nMaxQty}" READONLY>개
+							</td>
+							<td>&nbsp;</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr cond="!$bundle || $bundle == 'null' && $bundle_fixed_element">
+		<th>{$lang->order_bundlings}</th>
+		<td>
+			<div>
+				<table id="selected_bundles">
+					<tbody>
+						<tr loop="$bundle_fixed_element=>$key,$val" id="bundle_{$val->nItemSrl}" data-typeid='{$val->nTypeid}' data-fixed='yes'>
+							<td>{$val->sItemName}</td>
+							<td style="width: 52px;">
+								<input type="hidden" name="bundle_item_srls" value="{$val->nItemSrl}" /><input type="text" data-unit-qty='{$val->nMaxQty}'name="bundle_qty" id="bundle_qty" class="quantity" value="{$val->nMaxQty}" READONLY>개
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+	<tr cond="count($oItemInfo->aBuyingOption)">
+		<th>{$lang->order_options}</th>
+		<td>
+			<select id="select_options">
+				<option value="">{$lang->cmd_select}</option>
+				<option loop="$oItemInfo->aBuyingOption=>$nIdx,$oOption" data-title="{$oOption->title}" data-price="{$oOption->price}">{$oOption->title} <span cond="$oOption->price > 0">+</span><span cond="$oOption->price != 0">{number_format($oOption->price)}</span></option>
+			</select>
+			<div>
+				<table id="selected_options"></table>
+			</div>
+		</td>
+	</tr>
+	<tr cond="is_array($oItemInfo->related_items) && count($oItemInfo->related_items)">
+		<th>{$lang->related_items}</th>
+		<td>
+			<ul loop="$oItemInfo->related_items=>$key,$val" class="related_items">
+				<li><input type="checkbox" name="related_item" value="{$val->item_srl}" data-price="{$val->getDiscountedPrice()}" checked="checked"></li>
+				<li><a href="{getUrl('','document_srl',$val->document_srl)}">{$val->item_name}</a></li>
+				<li class="p_orange">{$val->printDiscountedPrice()}</li>
+			</ul>
+		</td>
+	</tr>
+	<tr cond="count($oItemInfo->aBuyingOption)" class="item-total-price">
+		<th class="tprice_title">{$lang->sum}</th>
+		<td class="total_price number-font"><span id="related_sum"></span></td>
+	</tr>
+	<tr loop="$oItemInfo->extra_vars=>$nIdx,$oVal">
+		<th cond="$oVal->value != NULL && $aAllowedDisplay[$oVal->name]">{$oVal->title}</th>
+		<td cond="$oVal->value != NULL && $aAllowedDisplay[$oVal->name]">{$oVal->value} </td>
+	</tr>
+
+</table>
+<div id="total_amount" data-amount="0" style="display:none"></div>
+<div class="item-btn newclearfix">
+<!---※ 쿠폰은 결제창에서 입력하실 수 있습니다.---->
+</div>
+
+<div class="item-btn row">
+	<div cond="$mid_config->display_favorite_btn_detail!='N'" class="col-xs-6 col-xs-6l col-sm-4 col-sm-4r"><a class="btn-wishlist" href="#" onclick="addItemsToFavoritesInDetailPage(); return false;">{$lang->cmd_favorites}</a></div>
+	<div cond="$mid_config->display_cart_btn_detail!='N'" class="col-xs-6 col-xs-6r col-sm-4"><a class="btn-addcart" href="#" onclick="addItemsToCartInDetailPage(); return false;">{$lang->cmd_cart}</a></div>
+	<div cond="$mid_config->display_buy_btn_detail!='N'" class="col-xs-12 col-sm-4 col-sm-4l "><a class="btn-buynow" href="#" onclick="orderItemsInDetailPage(); return false;">{$lang->cmd_direct_order}</a></div>
+	{$npay_script_handler_button}
+</div>
+
+<SCRIPT TYPE='text/javascript'>
+var oRelatedProduct = eval( {$bundle} );
+var oBundleQtyTable = eval( {$bundle_qty_table} );
+
+jQuery(function($) 
+{
+	drawPriceTag( '{$oItemInfo->price}', '{$discount_amount}', '{$discounted_price}' );
+	$('#quantity_up').click(function() 
+	{
+		var $oFixedProducts = jQuery("#selected_bundles tr[data-fixed='yes'] td :text" );
+		$oFixedProducts.each( function(){
+			var $nUnitQty = parseInt( jQuery(this).attr('data-unit-qty') ); 
+			this.value = parseInt( this.value ) + $nUnitQty;
+		});
+
+	});
+	$('#quantity_down').click(function() 
+	{
+		if( $('#quantity_{$oItemInfo->item_srl}').val() > 1 )
+		{
+			var $oFixedProducts = jQuery("#selected_bundles tr[data-fixed='yes'] td :text" );
+			$oFixedProducts.each( function(){
+				var $nUnitQty = parseInt( jQuery(this).attr('data-unit-qty') ); 
+				this.value = parseInt( this.value ) - $nUnitQty;
+			});
+		}
+	});
+	$('#select_bundles').change(function() 
+	{
+		var $nQty = jQuery('#item_{$oItemInfo->item_srl} :text' ).val();
+		var $opt = $('option:selected',this);
+		var nItemSrl = $opt.attr('data-itemsrl');
+		var title = $opt.attr('data-title');
+		var nTypeId = $opt.attr('data-typeid');
+		var $oRelatedProducts = jQuery('#selected_bundles tr[data-typeid='+nTypeId+'] td :text' );
+		var nRelatedProductQty = 0;
+
+		$oRelatedProducts.each( function(){
+			nRelatedProductQty += parseInt( this.value );
+		});
+
+		// 동일 계열 상품의 선택 수량 점검
+		if( parseInt( $nQty ) * parseInt( oBundleQtyTable[nTypeId] ) <= nRelatedProductQty )
+			return;
+
+		//if (!$('#option_'+option_srl).length) 
+		//{
+			$('#selected_bundles').append('<tr id="bundle_'+nItemSrl+'" data-typeid="'+ nTypeId +'"><td>'+ title + '</td><td><input type="hidden" name="bundle_item_srls" value="' + nItemSrl + '" /><input type="text" name="bundle_qty" id="bundle_qty" class="quantity" value="1"/>' + xe.lang.each + '</td><td><span onclick="jQuery(this).parent().parent().remove();" class="deleteItem"></span></td></tr>');
+		//}
+	});
+});
+</SCRIPT>

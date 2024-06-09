@@ -1,0 +1,166 @@
+@charset "UTF-8";
+/* Item Table : ncart:cartitems, ncart:orderitems, ncart:ordercomplete, nstore:orderlist, nstore:orderdetail  */
+.item-table{width:100%; margin:0 0 16px 0; padding:0; border:1px solid #ddd; border-spacing:0}
+.item-table th,
+.item-table td{padding:13px 8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.item-table td{vertical-align:top; font-family:돋움,sans-serif}
+.item-table thead th,
+.item-table thead td{background:#fafafa; color:#333}
+.item-table thead th{font-weight:bold}
+.item-table thead td{text-align:right}
+.item-table .list-item td{padding-top:10px; padding-bottom:10px; border-top:1px solid #ddd}
+.item-table .thumbnail{width:33.3%}
+@media (min-width:480px){
+	.item-table .thumbnail{width:25%}
+}
+.item-table .thumbnail img{width:100%; max-width:100%; height:auto}
+.item-table .info{position:relative}
+.item-table .info .item-title{margin-top:4px; font-weight:bold}
+.item-table .info .item-title a{color:#444}
+.item-table .info .item-option-title,
+.item-table .info .item-price,
+.item-table .info .item-quantity{margin-top:7px; font-size:0.923em}
+.item-table .info .item-sum-price{margin-top:12px; color:#333}
+.item-table strong{color:#af5592}
+.item-table a{color:#666}
+
+
+/* Info Table : ncart:orderitems, ncart:ordercomplete, nstore:orderdetail */
+.info-table{width:100%; margin:0 0 16px; padding:0; border:1px solid #ddd; border-spacing:0}
+.info-table th,
+.info-table td{padding:13px 8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.info-table td{font-family:돋움,sans-serif}
+.info-table thead th,
+.info-table thead td{background:#fafafa; border-bottom:1px solid #ddd; color:#333}
+.info-table thead th{font-weight:bold}
+.info-table thead td{text-align:right}
+.info-table tfoot th,
+.info-table tfoot td{border-top:1px solid #ddd; font-weight:bold}
+.info-table tfoot td{color:#af5592}
+.info-table tbody th,
+.info-table tbody td{border-bottom:1px solid #f2f2f2}
+.info-table tbody tr:last-child th,
+.info-table tbody tr:last-child td{border-bottom:0}
+.info-table tbody .status td{position:relative}
+.info-table tbody .status td .button-group{display:inline-block; position:absolute; top:5px; right:8px; height:30px; line-height:30px}
+.info-table tbody .status td .button-group span{float:right}
+.info-table tbody .division th,
+.info-table tbody .division td{border-top:1px double #ddd}
+.info-table tfoot th,
+.info-table tbody th{width:33.3%; border-right:1px solid #f2f2f2}
+@media (min-width:480px){
+	.info-table tfoot th,
+	.info-table tbody th{width:25%}
+}
+.info-table strong{color:#af5592}
+.info-table a{color:#666}
+
+
+/* Info Table : orderitems custom */
+#total-price tfoot th,
+#total-price tfoot td{padding-top:8px; padding-bottom:8px}
+#total-price #payment_amount{font-size:2em}
+#payment-method .info-table{border-color:#bbb}
+#payment-method .info-table tbody th,
+#payment-method .info-table tbody td{background-color:#eee}
+#payment-method .info-table tbody td{padding:16px}
+
+
+/* Fieldset Table */
+.fieldset-table{width:100%; margin:0 0 16px; padding:0; border:1px solid #ddd; border-spacing:0}
+.fieldset-table th,
+.fieldset-table td{padding-left:8px; padding-right:8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.fieldset-table th{width:33.3%; padding-right:0}
+.fieldset-table td{font-family:돋움,sans-serif}
+@media (min-width:480px){
+	.fieldset-table th{width:25%}
+}
+.fieldset-table thead th,
+.fieldset-table thead td{padding-top:13px; padding-bottom:13px; background:#fafafa; border-bottom:1px solid #ddd; color:#333}
+.fieldset-table thead th{font-weight:bold}
+.fieldset-table thead td{text-align:right}
+.fieldset-table tbody th,
+.fieldset-table tbody td{padding-top:8px; padding-bottom:8px; border-bottom:1px solid #f2f2f2}
+.fieldset-table tbody tr:last-child th,
+.fieldset-table tbody tr:last-child td{border-bottom:0}
+
+.fieldset-table em{font-style:normal; color:#ff0000}
+
+.fieldset-table .destination ul{margin:0; padding:0; list-style:none}
+.fieldset-table .destination ul:last-child{margin-top:5px}
+.fieldset-table .destination li{float:left; margin:0 5px 0 0; padding:0}
+.fieldset-table .destination li a{font-family:돋움,sans-serif; color:#888}
+.fieldset-table .destination li a span{display:block; padding:7px 8px 6px; background-color:#fcfcfc; border:1px solid #ccc}
+.fieldset-table .destination li a:hover span{background-color:#fff; border-color:#aaa}
+
+.fieldset-table select,
+.fieldset-table input[type="text"],
+.fieldset-table input[type="password"],
+.fieldset-table input[type="email"],
+.fieldset-table input[type="url"],
+.fieldset-table input[type="search"],
+.fieldset-table input[type="tel"],
+.fieldset-table input[type="datetime"],
+.fieldset-table input[type="datetime-local"],
+.fieldset-table input[type="date"],
+.fieldset-table input[type="month"],
+.fieldset-table input[type="time"],
+.fieldset-table input[type="week"],
+.fieldset-table input[type="number"],
+.fieldset-table input[type="color"],
+.fieldset-table input[type="button"]{height:38px; padding:0 8px; border:1px solid #d8d8d8; border-radius:0; vertical-align:middle; font-family:돋움,sans-serif; color:#000; outline:none; -webkit-appearance:none}
+.fieldset-table input[type="text"],
+.fieldset-table input[type="password"],
+.fieldset-table input[type="email"],
+.fieldset-table input[type="url"],
+.fieldset-table input[type="search"]{width:100%}
+.fieldset-table input[type="radio"]{margin:0 5px 0 0; padding:0; border:0; vertical-align:middle; cursor:pointer}
+.fieldset-table label{display:inline-block; margin:0 8px 0 0; vertical-align:middle; cursor:pointer}
+.fieldset-table .textarea textarea{display:block; width:100%; height:76px; padding:5px; border:1px solid #d8d8d8; border-radius:0; font-family:돋움,sans-serif; color:#000; outline:none; -webkit-appearance:none}
+
+.fieldset-table ul.tel{margin:0; padding:0; list-style:none}
+.fieldset-table ul.tel li{float:left; margin:0; padding:0}
+.fieldset-table ul.tel li.dash{margin:12px 3px 0; color:#ccc}
+
+/* Address XE Core 1.5 ~ 1.7.12 */
+.fieldset-table .kr_zip .krZip .addr_indicator{margin:0}
+.fieldset-table .kr_zip .krZip .addr_indicator input.current_address{width:85%}
+.fieldset-table .kr_zip .krZip .addr_indicator button.btn,
+.fieldset-table .kr_zip .krZip .addr3_input button.btn{height:38px; padding:0 10px 0 11px !important; background:#f8f8f8; border:1px solid #d8d8d8; border-radius:0; box-shadow:none; line-height:38px !important; font-family:돋움,sans-serif; color:#888; text-shadow:none; outline:none; -webkit-appearance:none}
+.fieldset-table .kr_zip .krZip .addr_indicator button.btn:hover,
+.fieldset-table .kr_zip .krZip .addr_indicator button.btn:focus,
+.fieldset-table .kr_zip .krZip .addr3_input button.btn:hover,
+.fieldset-table .kr_zip .krZip .addr3_input button.btn:focus{border-color:#aaa}
+.fieldset-table .kr_zip .krZip .addr1_selector li,
+.fieldset-table .kr_zip .krZip .addr2_selector li{float:left; margin:0 5px 5px 0}
+.fieldset-table .kr_zip .krZip .addr1_selector li button.btn,
+.fieldset-table .kr_zip .krZip .addr2_selector li button.btn{height:auto !important; margin:0 !important; padding:6px 10px 6px 11px !important; background:#fff; border:1px solid #ccc; border-radius:0; box-shadow:none; line-height:38px !important; font-family:돋움,sans-serif; color:#888; text-shadow:none; outline:none; -webkit-appearance:none}
+.fieldset-table .kr_zip .krZip .addr1_selector li button.btn:hover,
+.fieldset-table .kr_zip .krZip .addr1_selector li button.btn:focus,
+.fieldset-table .kr_zip .krZip .addr2_selector li button.btn:hover,
+.fieldset-table .kr_zip .krZip .addr2_selector li button.btn:focus{border-color:#aaa}
+
+/* Address XE Core 1.7.12 ~ */
+.fieldset-table .kr_zip .krZip .krzip-postcode-wrap label{display:none}
+.fieldset-table .kr_zip .krZip .krzip-postcode-wrap input.krzip-postcode{width:96px}
+.fieldset-table .kr_zip .krZip .krzip-postcode-wrap input.krzip-search{height:38px !important; padding:0 10px 0 11px !important; background:#f8f8f8; border:1px solid #d8d8d8; border-radius:0; box-shadow:none; line-height:38px !important; font-family:돋움,sans-serif; color:#888; text-shadow:none; outline:none; -webkit-appearance:none}
+
+.fieldset-table .kr_zip .krZip .krzip-address-wrap{margin-top:4px}
+.fieldset-table .kr_zip .krZip .krzip-address-wrap label{display:none}
+.fieldset-table .kr_zip .krZip .krzip-address-wrap input{margin-bottom:5px}
+.fieldset-table .kr_zip .krZip .krzip-address-wrap .krzip-jibunAddress{display:none}
+
+.fieldset-table .kr_zip .krZip .krzip-postcode-wrap input:disabled,
+.fieldset-table .kr_zip .krZip .krzip-address-wrap input:disabled{background:#ebebe4; -webkit-opacity:1; color:#000}
+
+.fieldset-table .kr_zip .krZip .krzip-detailAddress-wrap label{display:inline-block; margin:5px 0; padding:0}
+.fieldset-table .kr_zip .krZip .krzip-guide{width:100%; margin-top:4px}
+
+
+/* Mileage */
+#payment-mileage td .input_mileage{width:100%; margin:0 0 5px; padding:6px 8px 5px; border:1px solid #ccc; text-align:right; font-family:돋움,sans-serif; color:#000; outline:none}
+
+
+/* Delivery Fee */
+#delivery-fee th,
+#delivery-fee td{padding-top:13px; padding-bottom:13px}

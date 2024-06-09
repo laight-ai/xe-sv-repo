@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/* Item Table : ncart:cartitems, ncart:orderitems, ncart:ordercomplete, nstore:orderlist, nstore:orderdetail  */
+.item-table{width:100%; margin:0 0 16px 0; padding:0; border:1px solid #ddd; border-spacing:0}
+.item-table th,
+.item-table td{padding:13px 8px; text-align:left; font-weight:normal; font-size:1.083em; color:#666}
+.item-table td{vertical-align:top; font-family:돋움,sans-serif}
+.item-table thead th,
+.item-table thead td{background:#fafafa; color:#333}
+.item-table thead th{font-weight:bold}
+.item-table thead td{text-align:right}
+.item-table .list-item td{padding-top:10px; padding-bottom:10px; border-top:1px solid #ddd}
+
+.item-table .thumbnail{width:33.3%}
+@media (min-width:480px){
+	.item-table .thumbnail{width:25%}
+}
+.item-table .thumbnail img{width:100%; max-width:100%; height:auto}
+
+.item-table .info{position:relative}
+.item-table .info .item-title{margin-top:4px; font-weight:bold}
+.item-table .info .item-title a{color:#444}
+.item-table .info .item-option-title,
+.item-table .info .item-price,
+.item-table .info .item-quantity{margin-top:7px; font-size:0.923em}
+.item-table .info .item-sum-price{margin-top:12px; color:#333}
+.item-table strong{color:#af5592}
+.item-table a{color:#666}
+
+/* Item Table : cartitems custom  */
+.item-table tfoot td{padding-top:5px; padding-bottom:5px; background:#f8f8f8; border-top:1px solid #ddd; text-align:right}
+.item-table .info .item-price{margin-top:12px}
+.item-table .info .item-price .price1{text-decoration:line-through; color:#888}
+.item-table .info .item-price .price2{color:#333}
+.item-table .checkbox{width:30px; text-align:right}
+.item-table .item-quantity{margin-top:15px}
+.item-table .item-quantity input.quantity{display:inline-block; width:36px; height:28px; line-height:28px; vertical-align:middle; margin:0; padding:0 6px; background:#fff; border:1px solid #ddd; border-radius:0; text-align:center; color:#666; outline:none; -webkit-appearance:none}
+.item-table .item-quantity .iconUp,
+.item-table .item-quantity .iconDown{display:inline-block; width:28px; height:28px; line-height:28px; vertical-align:middle; background:#f8f8f8; border:1px solid #ddd; text-align:center; color:#888; cursor:pointer}
+.item-table .item-quantity .iconUp{border-left:0}
+.item-table .item-quantity .iconDown{border-right:0}
+.item-table .item-quantity .updateQuantity{margin-left:6px; vertical-align:middle; background:#f2f2f2}
+
+.item-table .each-item td{padding-top:5px; padding-bottom:5px; border-top:1px solid #f2f2f2}
+.item-table .each-item .each-price{float:left; height:28px; line-height:28px}
+.item-table .each-item .each-price strong{color:#af5592}
+.item-table .each-item .each-payment{float:right}
+
+/* Item Table : cartitems button custom */
+.item-button{display:inline-block; height:30px; line-height:30px; padding:0 10px; border:1px solid; font-family:돋움,sans-serif; cursor:pointer; outline:none}
+.button-update{height:28px; line-height:28px; background:#f2f2f2; border-color:#d8d8d8; color:#666}
+.button-payment{margin-right:8px; background:#fff; border-color:#ccc; color:#666}
+.button-delete-itemc{background:#f3f3f3; border-color:#ccc; color:#666}
+.button-delete-itemf{position:absolute; right:-22px; bottom:8px; background:#f3f3f3; border-color:#ccc; color:#666}
+.button-delete-all{background:#fff; border-color:#ccc; text-align:center; color:#333}
+
+
+/* Total Price */
+#total-price{margin-top:16px}
+#total-price .price-table{width:100%; margin:0; padding:0; border:1px solid #ccc; border-spacing:0}
+#total-price .price-table td{width:50%; padding:6px 8px; background:#f8f8f8; vertical-align:top; font-family:돋움,sans-serif; font-weight:normal; font-size:1.083em; color:#666}
+#total-price .price-table .count-total-price div{padding:3px 0}
+#total-price .price-table #payment_amount{padding-left:16px; border-left:1px solid #ddd; font-weight:bold}
+#total-price .price-table #payment_amount div{padding:5px 0}
+#total-price .price-table #payment_amount .price-total{font-size:1.500em; color:#af5592}
+@media (min-width:768px){
+	#total-price .price-table td{font-size:1.167em}
+}
+
+
+/* No List Item */
+.no-list-item{text-align:center; font-size:1.500em}

@@ -1,0 +1,66 @@
+<div cond="!$is_logged" id="qna-form" class="message-form">{$lang->msg_login_required}</div>
+
+<form cond="$is_logged" action="./" method="post" onsubmit="return procFilter(this, insert_comment)" id="qna-form" class="commentForm" >
+	<input type="hidden" name="vid" value="{$vid}" />
+	<input type="hidden" name="mid" value="{$mid}" />
+	<input type="hidden" name="item_srl" value="{$item_srl}" />
+
+	<table class="view_type1">
+		<tr class="write-about">
+			<td>
+				<span>{$lang->about_qna}</span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="content" class="commentArea"></textarea>
+			</td>
+		</tr>
+	</table>
+	<div class="write-button">
+		<input type="submit" value="{$lang->cmd_ask_question}" accesskey="s" id="qna-com" />
+		<a href="#" id="qna-cancel">{$lang->cancel}</a>
+	</div>
+</form>
+
+<!--@if(count((array)$qna_list))-->
+<script>
+function _sendGotoQnaClickEvent()
+{
+	var sTmpTitle = 'mob_indetail_page_goto_qna_menu';
+	sendClickEventGaectk( 'link', sTmpTitle, '#');
+}
+function _sendQnaClickEvent(nReviewSrl)
+{
+	var sTmpTitle = 'mob_indetail_page_goto_qna_'+nReviewSrl;
+	sendClickEventGaectk( 'link', sTmpTitle, '#');
+}
+</script>
+	<div id="qna-list" class="reviews row">
+		<ul class="col-xs-12">
+			{@ $listi=0; $morei=1; }
+			<li cond="$remaining_qna>0" class="list-page list-page1">
+				<div class="review-info">
+				<a  href="{getUrl('mid',$qna_board_mid,'category',$qna_category_srl, 'document_srl','')}" onclick="_sendGotoReviewClickEvent();">질문 게시판의 {$remaining_qna}개 더보기</A>
+				</div>
+			</li>
+			<li loop="$qna_list=>$key,$comment" id="comment_{$key}" class="list-page list-page{$morei}<!--@if($morei > 1)--> list-hidden<!--@endif-->">
+				<div class="review-info">
+					{$comment->nick_name} | {zdate($comment->regdate, 'Y-m-d')} &nbsp;<span class="estimate"><!--@for($i=0;$i<5;$i++)--><!--@if($i<$comment->voted_count)--><img src="./img/star.png" alt="" /><!--@end--><!--@end--></span>
+				</div>
+				<div class="comment-content"><a href="{getUrl('mid',$qna_board_mid,'document_srl',$key)}" onclick="_sendQnaClickEvent('{$key}');" target='_new'>{$comment->title} ({$lang->read_review_in_detail})</a></div>
+				{@ $listi++}
+				<block cond="$listi% $qnas_per_page ==0">{@ $morei++}</block>
+			</li>
+			<block cond="$listi% $qnas_per_page==0">{@ $morei--}</block>
+
+		</ul>
+	</div>
+	<div cond="$morei > 1" id="qna-page-num" class="cmt-pagination newclearfix">
+		<a loop="$i=1; $i-1<$morei; $i++" href="#" class="on"|cond="$i==1">{$i}</a>
+	</div>
+
+<!--@else-->
+	<div class="no-comment">{$lang->msg_no_questions}.</div>
+<!--@endif-->
+	<div class="qna-write-line"><a href="/{$qna_board_mid}" id="qna-write">{$lang->qna_write}</a></div>

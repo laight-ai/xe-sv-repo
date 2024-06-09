@@ -1,0 +1,70 @@
+<block cond="!$module_info->list_columns">{@ $module_info->list_columns = 3}</block>
+{@ $list_col = 12 / $module_info->list_columns; }
+
+{@
+if( !$page )
+	$page = 1;
+if( !$module_info->list_count )
+	$module_info->list_count = 4;
+}
+<SCRIPT TYPE='text/javascript'>
+// Enhanced E-Commerce Tagging Begin (201501121) singleview.co.kr
+gaectkList.init( '{$page}', '{$module_info->list_count}' );
+// Enhanced E-Commerce Tagging End (201501121) singleview.co.kr
+</SCRIPT>
+<div class="display-grid">
+	{@ $listi = 0}
+	<block loop="$aList=>$nIdx,$oItem">
+<SCRIPT TYPE='text/javascript'>
+// Enhanced E-Commerce Tagging Begin (201501121) singleview.co.kr
+gaectkList.queueItemInfo( '{$oItem->item_srl}', '{$oItem->item_name}', '{$oItem->enhanced_item_info->ga_category_name}', '{$oItem->enhanced_item_info->ga_brand_name}', '{$oItem->enhanced_item_info->ga_variation_name}', '{$oItem->price}' );
+// Enhanced E-Commerce Tagging End (201501121) singleview.co.kr
+</SCRIPT>
+		<block cond="$listi%$module_info->list_columns == 0"><ul class="row"></block>
+			<li id="item_{$oItem->item_srl}" class="col-xs-{$list_col}<!--@if(($listi+1)%$module_info->list_columns==0)--> li-last<!--@endif-->">
+				<a class="item-thumbnail" href="/{$mid}/{$oItem->document_srl}" onClick="_itemDetailClick('{$oItem->item_srl}');">
+					<img src="{$oItem->getThumbnailUrl($module_info->list_thumbnail_width,$module_info->list_thumbnail_height,$module_info->list_thumbnail_type)}" />
+				</a>
+				<a class="item-name" href="/{$mid}/{$oItem->document_srl}" onClick="_itemDetailClick('{$oItem->item_srl}');">{cut_str($oItem->item_name, $module_info->subject_cutsize)}</a>
+				<div class="item-price number-font">
+					<!--@if($oItem->discount_amount)-->
+						<span class="price" style="text-decoration:line-through">{number_format($oItem->price)}</span><span>{number_format($oItem->discounted_price)}</span>
+					<!--@else-->
+						<!---span>{number_format($oItem->discounted_price)}</span--->
+					<!--@endif-->
+				</div>
+				<block loop="$oItem->extra_vars=>$nIdx,$oVal">
+					<div cond="$oVal->value != NULL && $aAllowedDisplay[$oVal->name]" class="item-meta">{$oVal->title} : {$oVal->value}</div>
+				</block>
+				<div cond="$mid_config->display_favorite_btn_catalog=='Y'" class="item-choice">
+					<!---a href="#" class="btn" onclick="addItemsToCart({$oItem->item_srl}); return false;">{$lang->cmd_cart}</a--->
+					<a href="#" class="btn" onclick="addItemsToFavoritesInCatalogPage({$oItem->item_srl}); return false;">WISH LIST</a> 
+				</div>
+
+				<block cond=0>
+					<div cond="$k=='sales_count' && $module_info->list_info=='Y'" class="item-meta">{$lang->sales_count} : {$oItem->sales_count}</div>
+				</block>
+				<div class="item-badge">
+					<ul>
+						<li cond="$oItem->enhanced_item_info->default_badge_icon['best']==1"><img src="./img/best.png" /></li>
+						<li cond="$oItem->enhanced_item_info->default_badge_icon['hot']==1"><img src="./img/hot.png" /></li>
+						<li cond="$oItem->enhanced_item_info->default_badge_icon['new']==1"><img src="./img/new.png" /></li>
+						<li cond="$oItem->enhanced_item_info->default_badge_icon['sale']==1"><img src="./img/sale.png" /></li>
+					</ul>
+				</div>
+			</li>
+		{@ $listi++}
+	<block cond="$listi%$module_info->list_columns == 0"></ul></block>
+	</block>
+	<block cond="$listi%$module_info->list_columns != 0"></ul></block>
+</div>
+
+<SCRIPT TYPE='text/javascript'>
+// Enhanced E-Commerce Tagging Begin (201501121) singleview.co.kr
+gaectkList.patchImpression();
+function _itemDetailClick( nItemSrl )
+{
+	gaectkList.sendClicked( nItemSrl );
+}
+// Enhanced E-Commerce Tagging End (201501121) singleview.co.kr
+</SCRIPT>
