@@ -20,12 +20,13 @@ class svshortenerModel extends module
  **/
 	public function getShortenerInfo( $sQueryValue )
 	{
+		$args = new stdClass();
 		$args->shorten_uri_value = $sQueryValue;
 		$output = executeQuery('svshortener.getSvshortenersUriInfo', $args );
 
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svshortener_db_query');
-		if( count( $output->data ) == 0 )  // 새로운 uri value이면
+		if( count( (array)$output->data ) == 0 )  // 새로운 uri value이면
 			return false;
 		elseif( $output->data->utm_service_name == 'rel' ) // 연관검색어 유형이면 svtracker addon에서 gatk js script 출력 거부
 			return false;

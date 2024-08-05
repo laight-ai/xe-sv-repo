@@ -15,6 +15,7 @@ class svshortenerController extends svshortener
 
 	public function increaseCounter($sQueryValue)
 	{
+		$oArgs = new stdClass();
 		$oArgs->shorten_uri_value = $sQueryValue;
 		$output = executeQuery('svshortener.updateHitCount', $oArgs );
 		if( !$output->toBool() )
