@@ -25,11 +25,12 @@ class svshortenerController extends svshortener
 		$oArgs->is_mobile_access = $_COOKIE['mobile'] == 'false' ? 'N' : 'Y';
 		$oArgs->user_agent = trim( $_SERVER['HTTP_USER_AGENT'] );
 		$output = executeQuery('svshortener.insertHitLog', $oArgs );
+        unset($oArgs);
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svshortener_db_query');
 	}
 /**
- * @brief LP¿¡ ÃÖÁ¾ ÁøÀÔÇÑ source¸¦ session¿¡ ±â·Ï
+ * @brief LPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sourceï¿½ï¿½ sessionï¿½ï¿½ ï¿½ï¿½ï¿½
  **/
 	public function setSessionSource($sSource)
 	{
@@ -40,7 +41,7 @@ class svshortenerController extends svshortener
 		}
 	}
 /**
- * @brief LP¿¡ ÃÖÁ¾ ÁøÀÔÇÑ medium¸¦ session¿¡ ±â·Ï
+ * @brief LPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ mediumï¿½ï¿½ sessionï¿½ï¿½ ï¿½ï¿½ï¿½
  **/
 	public function setSessionMedium($sMedium)
 	{
@@ -51,7 +52,7 @@ class svshortenerController extends svshortener
 		}
 	}
 /**
- * @brief LP¿¡ ÃÖÁ¾ ÁøÀÔÇÑ campaign¸¦ session¿¡ ±â·Ï
+ * @brief LPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ campaignï¿½ï¿½ sessionï¿½ï¿½ ï¿½ï¿½ï¿½
  **/
 	public function setSessionCampaign($sCampaign)
 	{
@@ -62,7 +63,7 @@ class svshortenerController extends svshortener
 		}
 	}
 /**
- * @brief LP¿¡ ÃÖÃÊ ÁøÀÔÇÑ keyword¸¦ session¿¡ ±â·Ï
+ * @brief LPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ keywordï¿½ï¿½ sessionï¿½ï¿½ ï¿½ï¿½ï¿½
  **/
 	public function setSessionKeyword($sKeyword)
 	{

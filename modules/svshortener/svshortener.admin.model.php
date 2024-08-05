@@ -24,7 +24,7 @@ class svshortenerAdminModel extends svshortener
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svshortener_db_query');
 
-		if( count( $output->data ) == 0 )  // ÃÖÃÊ ÀÔ·Â½Ã ++ÀÎµ¦½º°¡ 0ÀÌ µÇµµ·Ï
+		if( count( $output->data ) == 0 )  // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â½ï¿½ ++ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½
 			return -1;
 
 		foreach( $output->data as $key => $val )
@@ -36,13 +36,15 @@ class svshortenerAdminModel extends svshortener
 	 */
 	public function isExistingUriValue( $sQueryValue )
 	{
+        $args = new stdClass();
 		$args->shorten_uri_value = $sQueryValue;
 		$output = executeQueryArray('svshortener.getSvshortenersUriValue', $args );
+        unset($args);
 
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svshortener_db_query');
 
-		if( count( $output->data ) == 0 )  // »õ·Î¿î uri valueÀÌ¸é
+		if( count( $output->data ) == 0 )  // ï¿½ï¿½ï¿½Î¿ï¿½ uri valueï¿½Ì¸ï¿½
 			return false;
 		else
 			return true;

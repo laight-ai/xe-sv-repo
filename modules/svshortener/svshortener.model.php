@@ -23,12 +23,13 @@ class svshortenerModel extends module
 		$args = new stdClass();
 		$args->shorten_uri_value = $sQueryValue;
 		$output = executeQuery('svshortener.getSvshortenersUriInfo', $args );
+        unset($args);
 
 		if( !$output->toBool() )
 			return new BaseObject(-1, 'msg_error_svshortener_db_query');
-		if( count( (array)$output->data ) == 0 )  // »õ·Î¿î uri valueÀÌ¸é
+		if( count( (array)$output->data ) == 0 )  // ï¿½ï¿½ï¿½Î¿ï¿½ uri valueï¿½Ì¸ï¿½
 			return false;
-		elseif( $output->data->utm_service_name == 'rel' ) // ¿¬°ü°Ë»ö¾î À¯ÇüÀÌ¸é svtracker addon¿¡¼­ gatk js script Ãâ·Â °ÅºÎ
+		elseif( $output->data->utm_service_name == 'rel' ) // ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ svtracker addonï¿½ï¿½ï¿½ï¿½ gatk js script ï¿½ï¿½ï¿½ ï¿½Åºï¿½
 			return false;
 		else
 		{
@@ -37,7 +38,7 @@ class svshortenerModel extends module
 			$sRegdate = zdate( $output->data->regdate,'Ymd' );
 			$aTemp[1] = $output->data->utm_source_name;
 			$aTemp[2] = $output->data->utm_medium_name;
-			// campaign code ÀÛ¼º
+			// campaign code ï¿½Û¼ï¿½
 			$aTemp[3] = $this->_g_aSourceAbbreviation[$output->data->utm_source_name].'_'.$this->_g_aMediumAbbreviation[$output->data->utm_medium_name].'_REF_'.$this->_g_aServiceAbbreviation[$output->data->utm_service_name].'_'.$sRegdate;
 			$sUtmTerm = $this->generateUtmTerm($output->data->blogger_type,$output->data->utm_term,$output->data->blogger_id);
 			$aTemp[4] = $sUtmTerm.'_'.$sRegdate;

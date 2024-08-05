@@ -71,6 +71,7 @@ class svshortenerAdminController extends svshortener
 				elseif( $sInargTitle == 'end_date' )
 					$timestamp = strtotime($oArgs->start_date.' '.$oArgs->{$sInargTitle});
 
+                $oTempArg = new stdClass();
 				$oTempArg->{$sInargTitle} = date("Ymd", $timestamp);
 				$bValid = $this->_validateDateActual($oTempArg->{$sInargTitle});
 				if(!$bValid)
@@ -117,7 +118,7 @@ class svshortenerAdminController extends svshortener
 		$this->setRedirectUrl($returnUrl);
 	}
 /**
- * @brief ºñ¿ë ¹èºÐ ³¯Â¥ Çü½Ä ÆÇ´Ü
+ * @brief ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
  */
 	private function _getExpenseAllocationDateType($sDate)
 	{
@@ -140,7 +141,7 @@ class svshortenerAdminController extends svshortener
 		}
 	}
 /**
- * @brief yyyymmdd°¡ ½ÇÁ¦ ³¯Â¥ÀÎÁö °Ë»ç
+ * @brief yyyymmddï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
  */	
 	private function _validateDateActual($date, $format = 'Ymd')
 	{
