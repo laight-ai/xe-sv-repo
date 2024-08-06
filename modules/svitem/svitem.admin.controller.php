@@ -511,7 +511,9 @@ exit;
 		$sActionMode = Context::get('mode');
 		if(!$nModuleSrl || strlen( $sActionMode)==0)
 			return new BaseObject(-1, 'msg_invalid_request');
-		$args->module_srl = $nModuleSrl;
+        
+        $args = new stdClass();
+        $args->module_srl = $nModuleSrl;
 		if( $sActionMode == 'withdraw')
 		{
 			$nItemSrl = Context::get('item_srl');
@@ -527,7 +529,7 @@ exit;
 		{
 			$aItemSrl = Context::get('item_srls');
 			$nCategoryNodeSrl = (int)Context::get('catalog_node_srl');
-			if( !strlen( $nCategoryNodeSrl ) || !count( $aItemSrl ))
+			if( !strlen( $nCategoryNodeSrl ) || !count( (array)$aItemSrl ))
 				return new BaseObject(-1, 'msg_invalid_request');
 
 			$args->category_node_srl = $nCategoryNodeSrl;
@@ -550,6 +552,7 @@ exit;
 				if(!$output->toBool())
 					return $output;
 			}
+            unset($args);
 			if( $nAlreadyClassifiedItemCnt )
 				$this->add('notice', sprintf(Context::getLang('msg_item_already_classified'), $sAlreadyClassifiedItemName));
 		}
@@ -590,7 +593,8 @@ exit;
 		$sActionMode = Context::get('mode');
 		if(!$nModuleSrl || strlen( $sActionMode)==0)
 			return new BaseObject(-1, 'msg_invalid_request');
-		
+        
+        $args = new stdClass();
 		$args->module_srl = $nModuleSrl;
 		if( $sActionMode == 'withdraw')
 		{
@@ -611,22 +615,23 @@ exit;
 		{
 			$aItemSrl = Context::get('item_srls');
 			$nCategoryNodeSrl = (int)Context::get('show_window_srl');
-			if( !strlen( $nCategoryNodeSrl ) || !count( $aItemSrl ))
+			if( !strlen( $nCategoryNodeSrl ) || !count( (Array)$aItemSrl ))
 				return new BaseObject(-1, 'msg_invalid_request');
 
-			$args->category_srl = $nCategoryNodeSrl;
+            $args->category_srl = $nCategoryNodeSrl;
 			foreach( $aItemSrl as $key=>$val)
 			{
 				$args->item_srl = $val;
 				// check the item is already inserted
 				$output = executeQuery('svitem.getAdminShowWindowItemByItemSrl', $args);
-				if( count( $output->data ) > 0 )
+				if( count( (Array)$output->data ) > 0 )
 					continue;
 				$output = executeQuery('svitem.insertAdminShowWindowItem', $args);
 				if(!$output->toBool())
 					return $output;
 			}
 		}
+        unset($args);
 		$this->_resetCache();
 	}
 /**
@@ -1260,6 +1265,7 @@ exit;
  **/
 	private function _updateShowWindowCatalog() 
 	{
+        $args = new stdClass();
 		$args->category_srl = Context::get('category_srl');
 		$args->category_name = Context::get('category_name');
 		$args->thumbnail_width = Context::get('thumbnail_width');
@@ -1267,6 +1273,7 @@ exit;
 		$args->num_columns = Context::get('num_columns');
 		$args->num_rows = Context::get('num_rows');
 		return executeQuery('svitem.updateDisplayCategory', $args);
+        unset($args);
 	}
 /**
  * @brief 
@@ -1284,6 +1291,7 @@ exit;
 			if( !$nExtMallRsp )
 				continue;
 
+            $args = new stdClass();
 			$args->ext_mall_srl = (int)$aExtMallSrl[$key];
 			$args->extmall_rsp = $nExtMallRsp;
 			$args->extmall_bundle_qty = (int)$aExtMallQty[$key];
@@ -1315,14 +1323,15 @@ exit;
 
 		if( strlen( $sExtMallActive ) == 0 )
 			$sExtMallActive = 'Y';
-		
+        
+        $args = new stdClass();
 		$args->item_srl = $nItemSrl;
 		$args->type = $sExtMallType;
 		$args->title = $sExtMallTitle;
 		$args->url = $sExtMallUrl;
 		$args->is_active = $sExtMallActive;
-
 		$output = executeQuery('svitem.insertAdminExtmall', $args);
+        unset($args);
 		return $output;
 	}
 /**
@@ -1344,11 +1353,12 @@ exit;
 		// extra_vars에 등록
 		$oExtMallConfig = new stdClass();
 		$oExtMallConfig->toggle = $sExtMallToggle;
+        $args = new stdClass();
 		$args->extmall_log_conf = serialize($oExtMallConfig);
-		
 		$args->module_srl = $nModuleSrl;
 		$args->item_srl = $nItemSrl;
 		$output = executeQuery('svitem.updateAdminItemExtmallLogConfig', $args);
+        unset($args);
 		return $output;
 	}
 /**
@@ -1364,8 +1374,10 @@ exit;
 			$dest_route = $parent_id;
 		else
 		{
+            $args = new stdClass();
 			$args->node_id = $parent_id;
 			$output = executeQuery('svitem.getCategoryInfo', $args);
+            unset($args);
 			if (!$output->toBool())
 				return $output;
 			$dest_node = $output->data;
@@ -1373,11 +1385,13 @@ exit;
 			$route_text = Context::getLang('category') . ' > ' . $output->data->category_name;
 		}
 		// new route
+        $new_args = new stdClass();
 		$new_args->node_id = $node_id;
 		$new_args->node_route = $dest_route;
 		$new_args->node_route_text = $route_text;
 		$new_args->list_order = $parent_id + 1;
 		// update children
+        $args = new stdClass();
 		$args->node_id = $node_id;
 		$output = executeQuery('svitem.getCategoryInfo', $args);
 		$route_text = $route_text.' > '.$output->data->category_name;
@@ -1402,6 +1416,8 @@ exit;
 		}
 		// update current
 		$output = executeQuery('svitem.updateCategoryInfo', $args);
+        unset($args);
+        unset($new_args);
 		if (!$output->toBool())
 			return $output;
 		// root folder has no node_id.
@@ -1417,27 +1433,31 @@ exit;
 			return new BaseObject(-1, 'msg_invalid_request');
 
 		// get node_route
+        $args = new stdClass();
 		$args->node_id = $node_id;
 		$output = executeQuery('svitem.getCategoryInfo', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
 		$node_route = $output->data->node_route . $node_id . '.';
-
+        
 		// get subfolder count
-		unset($args);
+        $args = new stdClass();
 		$args->node_route = $old_route;
 		$output = executeQuery('svitem.getItemsByNodeRoute', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
-		// update subfolder count
-		unset($args);
 
+		// update subfolder count
+        $args = new stdClass();
 		foreach($output->data as $k => $v)
 		{
 			$args->item_srl = $v->item_srl;
 			$args->node_route = $node_route;
 			$output = executeQuery('svitem.updateItem', $args);
 		}
+        unset($args);
 		return $output;
 	}
 /**
@@ -1448,26 +1468,31 @@ exit;
 		$logged_info = Context::get('logged_info');
 		if (!$logged_info) 
 			return;
-
+        
+        $args = new stdClass();
 		$args->node_id = $next_id;
 		$output = executeQuery('svitem.getCategoryInfo', $args);
+        unset($args);
 		if (!$output->toBool()) 
 			return $output;
 		$next_node = $output->data;
-		unset($args);
 
 		// plus next siblings
+        $args = new stdClass();
 		$args->node_route = $next_node->node_route;
 		$args->list_order = $next_node->list_order;
 		$output = executeQuery('svitem.updateCategoryOrder', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
 
 		// update myself
 		$list_order = $next_node->list_order;
+        $args = new stdClass();
 		$args->node_id = $node_id;
 		$args->list_order = $list_order;
 		$output = executeQuery('svitem.updateCategoryNode', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
 	}
@@ -1480,18 +1505,21 @@ exit;
 		if (!$logged_info)
 			return;
 
+        $args = new stdClass();
 		$args->node_id = $prev_id;
 		$output = executeQuery('svitem.getCategoryInfo', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
 		$prev_node = $output->data;
-		unset($args);
 
 		// update myself
 		$list_order = $prev_node->list_order+1;
+        $args = new stdClass();
 		$args->node_id = $node_id;
 		$args->list_order = $list_order;
 		$output = executeQuery('svitem.updateCategoryNode', $args);
+        unset($args);
 		if (!$output->toBool())
 			return $output;
 	}
@@ -1516,12 +1544,14 @@ exit;
 		}
 
 		$nUniqueSrl = getNextSequence();
+        $args = new stdClass();
 		$args->category_node_srl = $nUniqueSrl;
 		$args->module_srl = $nModuleSrl;
 		$args->parent_srl = $nParentCategoryNodeSrl;
 		$args->category_name = 'please rename this '.$nUniqueSrl;
 		$args->listorder = $nUniqueSrl;
 		$output = executeQuery('svitem.insertAdminCategoryNode', $args);
+        unset($args);
 		return $output;
 		//$this->setMessage( 'success_inserted' );
 	}
@@ -1547,11 +1577,11 @@ exit;
 
 		if ($oCatalog->children_owned_item_count > 0 )
 			return new BaseObject(-1, 'msg_items_exist_in_subcatalog');
-
-		unset($args);
+        $args = new stdClass();
 		$args->module_srl = (int)$nModuleSrl;
 		$args->category_node_srl = (int)$nCategoryNodeSrl;
 		$output = executeQuery('svitem.deleteCategory', $args);
+        unset($args);
 		return $output;
 		//$this->setMessage( 'success_deleted' );
 	}
@@ -1563,10 +1593,12 @@ exit;
 		$sNodeName = trim(Context::get('node_name'));
 		if( strlen( $sNodeName ) == 0 )
 			return new BaseObject(-1, 'msg_node_name_required');
+        $args = new stdClass();
 		$args->category_name = $sNodeName;
 		$args->module_srl = (int)Context::get('module_srl');
 		$args->category_node_srl = (int)Context::get('category_node_srl');
 		$output = executeQuery('svitem.updateCategoryNode', $args);
+        unset($args);
 		if (!$output->toBool())
 		{
 			$output->setMessage( 'error occured' );

@@ -24,6 +24,7 @@ class svitemAdminModel extends svitem
 		$args = new stdClass();
 		$args->list_count = 1000;
 		$output = executeQueryArray('svitem.getModInstList', $args);
+        unset($args);
 		return $output->data;
 	}
 /**
@@ -33,9 +34,11 @@ class svitemAdminModel extends svitem
 	{
 		if(!$nItemSrl)
 			return Array();
+        $args = new stdClass();
 		$args->item_srl = $nItemSrl;
 		$args->is_active = 'Y';
 		$output = executeQueryArray('svitem.getExtmallListByItemSrl', $args);
+        unset($args);
 		return $output->data;
 	}
 /**
@@ -74,7 +77,9 @@ class svitemAdminModel extends svitem
  */
 	public function getAllItemCategoryInfo() 
 	{
+        $args = new stdClass();
 		$output = executeQueryArray('svitem.getItemList', $args);
+        unset($args);
 		if (!$output->toBool())
 			return;
 		
@@ -116,6 +121,7 @@ class svitemAdminModel extends svitem
 		$args = new stdClass();
 		$args->display = 'Y';
 		$output = executeQueryArray('svitem.getItemList', $args);
+        unset($args);
 		if (!$output->toBool())
 			return;
 		
@@ -135,15 +141,19 @@ class svitemAdminModel extends svitem
 		if( !$nModuleSrl )
 			return new BaseObject(-1, 'msg_invalid_request');
 
+        $args = new stdClass();
 		$args->module_srl = $nModuleSrl;
 		$output = executeQueryArray('svitem.getCatalogNodeList', $args);
+        unset($args);
 		if(count($output->data)==0)
 			return;
 		foreach( $output->data as $key=>$val)
 		{
+            $oItemArgs = new stdClass();
 			$oItemArgs->module_srl = $nModuleSrl;
 			$oItemArgs->category_node_srl = $val->category_node_srl;
 			$oItemListByCategorySrl = executeQueryArray('svitem.getAdminItemListByCategorySrl', $oItemArgs);
+            unset($oItemArgs);
 			$nCurCatalogBelongedItemCnt = count($oItemListByCategorySrl->data);
 			$output->data[$key]->belonged_item_count = $nCurCatalogBelongedItemCnt; 
 		}
@@ -152,11 +162,13 @@ class svitemAdminModel extends svitem
 		$oCatalog = new catalogList();
 		foreach( $output->data as $key=>$val) // 카탈로그 아이템을 연결리스트로 변환
 		{
+            $oArgs = new stdClass();
 			$oArgs->node_srl = $val->category_node_srl;
 			$oArgs->parent_srl = $val->parent_srl;
 			$oArgs->catalog_name = $val->category_name;
 			$oArgs->belonged_item_count = $val->belonged_item_count;
 			$bRet = $oCatalog->insertNode($oArgs);
+            unset($oArgs);
 		}
 		
 		$nBelongedItemCount = 0;
@@ -227,6 +239,7 @@ class svitemAdminModel extends svitem
 		$args = new stdClass();
         $args->extra_srl = $extra_srl;
 		$output = executeQuery('svitem.getItemExtra', $args);
+        unset($args);
 
 		if($output->toBool() && $output->data)
 		{
@@ -250,8 +263,10 @@ class svitemAdminModel extends svitem
 	public function getSvitemAdminInsertDeliveryInfo() 
 	{
 		$item_srl = Context::get('item_srl');
+        $args = new stdClass();
 		$args->item_srl = $item_srl;
 		$output = executeQuery('svitem.getItemInfo', $args);
+        unset($args);
 
 		if($output->toBool() && $output->data)
 		{
@@ -301,6 +316,7 @@ class svitemAdminModel extends svitem
 		$args->module_srl = $nModuleSrl;
 		$args->category_srl = $nCategoryNodeSrl;
 		$output = executeQueryArray('svitem.getAdminDisplayItemList', $args);
+        unset($args);
 		if(!$output->toBool())
 			return $output;
 		if(count($output->data))
@@ -324,6 +340,7 @@ class svitemAdminModel extends svitem
         $args = new stdClass();
 		$args->module_srl = $nModuleSrl;
 		$output = executeQueryArray('svitem.getAdminShowWindowCategoryByModuleSrl', $args);
+        unset($args);
 		if(!$output->toBool())
 			return $output;
 		return $output->data;
@@ -388,9 +405,11 @@ class svitemAdminModel extends svitem
 		if(!$nModuleSrl || !$nItemSrl)
 			return new BaseObject(-1, 'msg_invalid_request');
 
+        $oArg = new stdClass();
 		$oArg->module_srl = $nModuleSrl;
 		$oArg->item_srl = $nItemSrl;
 		$output = executeQuery('svitem.getAdminItem', $oArg);
+        unset($oArg);
 		return $output;
 	}
 /**
@@ -398,10 +417,12 @@ class svitemAdminModel extends svitem
  **/
 	public function getSvitemAdminItemListAjax() 
 	{
+        $oArg = new stdClass();
 		$oArg->module_srl = Context::get('module_srl');
 		$oArg->page = Context::get('page');
 		$oArg->category_node_srl = Context::get('category_srl');
 		$output = $this->_getItemList($oArg);
+        unset($oArg);
 		$this->add('data', $output->data);
 	}
 /**
@@ -441,6 +462,7 @@ class svitemAdminModel extends svitem
 //dispSvpromotionAdminItemDiscountList 위해서 임시 유지 끝
 		
 		$output = executeQueryArray('svitem.getAdminItemList', $oArg);
+        unset($oArg);
 		$oSvitemModel = &getModel('svitem');
 		$oModuleModel = getModel('module');
 		foreach( $output->data as $key=>$val )
@@ -449,6 +471,8 @@ class svitemAdminModel extends svitem
 			$val->mid = $oModuleInfo->mid;
 			$val->review_count = $oSvitemModel->getReviewCnt($val->item_srl);
 		}
+        unset($oSvitemModel);
+		unset($oModuleModel);
 		return $output;
 	}
 /**
@@ -467,6 +491,7 @@ class svitemAdminModel extends svitem
 		$aChild = array();
 		$args->module_srl = $nModuleSrl;
 		$output = executeQueryArray('svitem.getCategoryNodeList', $args);
+        unset($args);
 		if($output->data) 
 		{
 			foreach($output->data as $no => $val) 
