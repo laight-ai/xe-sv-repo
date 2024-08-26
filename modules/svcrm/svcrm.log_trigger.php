@@ -45,6 +45,7 @@ class svcrmEngageLogTrigger
 		{
 			$nLastTimestamp = strtotime($oSessionRst->data->last_update); // last session update timestamp
 			$nCurTimestamp = (int)microtime(TRUE);
+			$oArgs = new stdClass();
 			$oArgs->sSssionKey = $oSessionRst->data->session_key;
 			$oArgs->nMemberSrl = (int)$oParam->member_srl;
 			$oArgs->nDocSrl = (int)$oParam->document_srl;
