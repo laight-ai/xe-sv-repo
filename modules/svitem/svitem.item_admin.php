@@ -613,8 +613,8 @@ class svitemItemAdmin extends svitem
 			$oArgs->item_code = $this->_g_oNewItemHeader->item_code;
 		if($this->_g_oNewItemHeader->barcode)
 			$oArgs->barcode = $this->_g_oNewItemHeader->barcode;
-		if($this->_g_oNewItemHeader->price)
-			$oArgs->price = $this->_g_oNewItemHeader->price;
+		// if($this->_g_oNewItemHeader->price)
+		$oArgs->price = $this->_g_oNewItemHeader->price;  // allow 0 price
 		if($this->_g_oNewItemHeader->current_stock)
 			$oArgs->current_stock = $this->_g_oNewItemHeader->current_stock;
 		if($this->_g_oNewItemHeader->safe_stock)
