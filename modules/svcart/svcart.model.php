@@ -86,6 +86,7 @@ class svcartModel extends svcart
  **/
 	public function getGuestCartInfo($sNonKey, $sOldestDatetime, $sCartNos=null)
 	{
+		$oArgs = new stdClass();
 		$oArgs->non_key = $sNonKey;
 		if( $sOldestDatetime)
 			$oArgs->startdate = $sOldestDatetime;
